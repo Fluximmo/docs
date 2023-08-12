@@ -1,11 +1,12 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "$schema": "https://api.fluximmo.io/swagger",
+  "openapi": "https://api.fluximmo.io/swagger",
+  "name": "Real-estate data API - Fluximmo V2 (2.0.0)",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/logo_square_fluximmo.png",
+    "light": "/logo/logo_square_fluximmo.png"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon.ico",
   "colors": {
     "primary": "#9563FF",
     "light": "#AE87FF",
@@ -21,12 +22,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:contact@fluximmo.com"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://my.fluximmo.com"
   },
   "tabs": [
     {
@@ -75,8 +76,8 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "status": "https://status.fluximmo.com/",
+    "github": "https://github.com/Fluximmo",
+    "linkedin": "https://www.linkedin.com/company/fluximmo"
   }
 }
