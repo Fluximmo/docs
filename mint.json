@@ -19,6 +19,9 @@
       "to": "#9563FF"
     }
   },
+  "feedback": {
+    "thumbsRating": true
+  },
   "topbarLinks": [
     {
       "name": "Support",
