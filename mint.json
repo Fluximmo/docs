@@ -66,7 +66,89 @@
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
+      "pages": [
+        {
+          "group": "System",
+          "pages": [
+            "api-reference/system/getversion",
+            "api-reference/system/healthz",
+            "api-reference/system/get-the-list-of-real-estate-platforms"
+          ]
+        },
+        {
+          "group": "Adverts Search",
+          "pages": [
+            "api-reference/adverts-search/search-adverts"
+          ]
+        },
+        {
+          "group": "Properties Search",
+          "pages": [
+            "api-reference/properties-search/search-properties"
+          ]
+        },
+        {
+          "group": "Sample Properties",
+          "pages": [
+            "api-reference/sample-properties/get-a-sample-of-properties",
+            "api-reference/sample-properties/sample-properties-webhook-body"
+          ]
+        },
+        {
+          "group": "Properties",
+          "pages": [
+            "api-reference/properties/get-properties-byt-their-flx_id",
+            "api-reference/properties/retrieve-a-property-by-url"
+          ]
+        },
+        {
+          "group": "Properties Alerts",
+          "pages": [
+            "api-reference/properties-alerts/create-a-new-alert-for-this-property-search",
+            "api-reference/properties-alerts/get-the-search-criteria-of-a-propertyalert",
+            "api-reference/properties-alerts/deactivate-a-property-search-alert",
+            "api-reference/properties-alerts/update-the-search-criteria-of-a-property-alert",
+            "api-reference/properties-alerts/get-all-your-property-alerts",
+            "api-reference/properties-alerts/get-history-of-match-properties-by-its-saved-search-flxid"
+          ]
+        },
+        {
+          "group": "Adverts",
+          "pages": [
+            "api-reference/adverts/get-adverts-byt-their-flx_id"
+          ]
+        },
+        {
+          "group": "Adverts Alerts",
+          "pages": [
+            "api-reference/adverts-alerts/create-a-new-advert-alert-for-this-search",
+            "api-reference/adverts-alerts/get-the-search-criteria-of-an-advert-alert",
+            "api-reference/adverts-alerts/deactivate-a-search-advert-alert",
+            "api-reference/adverts-alerts/update-the-search-criteria-of-an-advert-alert",
+            "api-reference/adverts-alerts/get-all-your-advert-alerts",
+            "api-reference/adverts-alerts/get-history-of-match-adverts-by-its-saved-search-flxid"
+          ]
+        },
+        {
+          "group": "Sample Adverts",
+          "pages": [
+            "api-reference/sample-adverts/get-a-sample-of-ads",
+            "api-reference/sample-adverts/sample-advert-webhook-body"
+          ]
+        },
+        {
+          "group": "Analytics",
+          "pages": [
+            "api-reference/analytics/get-analytics-data-for-a-given-context-property-location-"
+          ]
+        },
+        {
+          "group": "Estimations",
+          "pages": [
+            "api-reference/estimations/estimate-the-price-of-a-property"
+          ]
+        }
+      ]
     },
     {
       "group": "Endpoint Examples",
