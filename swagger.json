@@ -1,1 +1,3912 @@
-{"openapi":"3.0.0","paths":{"/version":{"get":{"operationId":"GeneralController_getVersion","summary":"getVersion","description":"Get the app version","parameters":[],"responses":{"200":{"description":"Return current version","content":{"application/json":{"schema":{"$ref":"#/components/schemas/VersionRes"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["System"]}},"/healthz":{"get":{"operationId":"GeneralController_healthz","summary":"healthz","description":"For metrics server health checking","parameters":[],"responses":{"200":{"description":"Return OK"}},"tags":["System"]}},"/portals":{"get":{"operationId":"GeneralController_portals","summary":"Get the list of real-estate platforms","description":"Non exhaustive list of real-estate ad platforms - New platform can be added on specific request\n","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/String"}}}}]}}}}},"tags":["System"]}},"/v2/protected/adverts/search":{"post":{"operationId":"SearchAdvertsController_postSearch","summary":"Search adverts","description":"Search adverts with filters and fulltexts search terms","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SearchAdvertPayloadDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SearchAdvertsResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Search"],"security":[{"x-api-key":[]}]}},"/v2/protected/properties/search":{"post":{"operationId":"SearchPropertiesController_postSearch","summary":"Search properties","description":"Search properties with filters and fulltexts search terms","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SearchPropertyPayloadDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SearchPropertiesResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Search"],"security":[{"x-api-key":[]}]}},"/v2/sample/properties":{"get":{"operationId":"SamplePropertiesController_GetSampleProperties","summary":"Get a sample of properties","description":"Get a sample of properties","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/PropertyDto"}}}}]}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Sample Properties"]}},"/v2/protected/properties/{flxId}":{"get":{"operationId":"PropertiesController_getProperty","summary":"Get properties byt their flx_id","description":"Get properties by their flx_id (flx_id is the id of the property in the database) and return its properties","parameters":[{"name":"flxId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"properties":{"data":{"type":"object","$ref":"#/components/schemas/PropertyDto"}}}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""},"404":{"description":"","content":{"application/json":{"schema":{"type":"object","example":{"error":{"message":"Not Found","code":10003}}}}}}},"tags":["Properties"],"security":[{"x-api-key":[]}]}},"/v2/protected/properties/url":{"get":{"operationId":"PropertiesController_getPropertyByUrl","summary":"Retrieve a property by url","description":"Retrieve a property by one of it's advert URL","parameters":[{"name":"url","required":true,"in":"query","description":"Url of an advert to get the associated property","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"properties":{"data":{"type":"object","$ref":"#/components/schemas/PropertyDto"}}}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""},"404":{"description":"","content":{"application/json":{"schema":{"type":"object"}}}}},"tags":["Properties"],"security":[{"x-api-key":[]}]}},"/v2/protected/properties/search/alerts":{"put":{"operationId":"SaveSearchPropertiesCrudController_postSaveSearch","summary":"Create a new alert for this Property search","description":"Create a new alert on a Property search. The alert will be saved in the database and will be triggered when a new property is found.","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SaveSearchPropertiesPayloadDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavedSearchResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/properties/search/alerts/{alertId}":{"get":{"operationId":"SaveSearchPropertiesCrudController_getSaveSearch","summary":"Get the search criteria of a Propertyalert","description":"Get the search criteria of a Property alert by its id (alertId)","parameters":[{"name":"alertId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SaveSearchPropertiesPayloadDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Alerts"],"security":[{"x-api-key":[]}]},"patch":{"operationId":"SaveSearchPropertiesCrudController_updateSavedSearch","summary":"Update the search criteria of a Property alert","description":"Update the search criteria of a Property alert by its id (alertId) and return the new alertId","parameters":[{"name":"alertId","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SaveSearchPropertiesPayloadDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavedSearchResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Alerts"],"security":[{"x-api-key":[]}]},"delete":{"operationId":"SaveSearchPropertiesCrudController_deleteSavedSearch","summary":"Deactivate a Property search alert","description":"Deactivate a Property search alert by its id (alertId)","parameters":[{"name":"alertId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavedSearchResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/properties/search/alerts/all":{"get":{"operationId":"SaveSearchPropertiesCrudController_getAllSaveSearch","summary":"Get all your Property alerts","description":"Get the search criteria of all your Property alerts","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/ManySaveSearchPropertiesPayloadDto"}}}}]}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/properties/search/alerts/history/{flxId}":{"get":{"operationId":"SaveSearchPropertiesHistoryController_getProperty","summary":"Get history of match properties by its saved search flxId","description":"Get history of the properties matched to a saved search by its flxId. The history is composed of all the properties that have been match for this saved search.","parameters":[{"name":"skip","required":false,"in":"query","description":"Skip the first N results","schema":{"type":"number"}},{"name":"take","required":false,"in":"query","description":"Take the first N results","schema":{"type":"number"}},{"name":"flxId","required":true,"in":"path","description":"The flxId of the saved search","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/PropertyDto"}}}}]}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Properties Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/adverts/{flxId}":{"get":{"operationId":"AdvertsController_getAdvert","summary":"Get adverts byt their flx_id","description":"Get adverts by their flx_id (flx_id is the id of the adverts in the database)","parameters":[{"name":"flxId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"properties":{"data":{"type":"object","$ref":"#/components/schemas/AdvertDto"}}}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""},"404":{"description":"","content":{"application/json":{"schema":{"type":"object","example":{"error":{"message":"Not Found","code":10003}}}}}}},"tags":["Adverts"],"security":[{"x-api-key":[]}]}},"/v2/protected/adverts/search/alerts":{"put":{"operationId":"SaveSearchAdvertsCrudController_postSaveSearch","summary":"Create a new Advert alert for this search","description":"Create a new alert on a Advert search. The alert will be saved in the database and will be triggered when a new Advert is found.","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SaveSearchAdvertsPayloadDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavedSearchResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/adverts/search/alerts/{alertId}":{"get":{"operationId":"SaveSearchAdvertsCrudController_getSaveSearch","summary":"Get the search criteria of an Advert alert","description":"Get the search criteria of an Advert alert by its id (alertId)","parameters":[{"name":"alertId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SaveSearchAdvertsPayloadDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Alerts"],"security":[{"x-api-key":[]}]},"patch":{"operationId":"SaveSearchAdvertsCrudController_updateSavedSearch","summary":"Update the search criteria of an Advert alert","description":"Update the search criteria of an Advert alert by its id (alertId) and return the new alertId","parameters":[{"name":"alertId","required":true,"in":"path","schema":{"type":"string"}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/SaveSearchAdvertsPayloadDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavedSearchResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Alerts"],"security":[{"x-api-key":[]}]},"delete":{"operationId":"SaveSearchAdvertsCrudController_deleteSavedSearch","summary":"Deactivate a search Advert alert","description":"Deactivate a search Advert alert by its id (alertId)","parameters":[{"name":"alertId","required":true,"in":"path","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SavedSearchResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/adverts/search/alerts/all":{"get":{"operationId":"SaveSearchAdvertsCrudController_getAllSaveSearch","summary":"Get all your Advert alerts","description":"Get the search criteria of all your Advert alerts","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/ManySaveSearchAdvertsPayloadDto"}}}}]}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Alerts"],"security":[{"x-api-key":[]}]}},"/v2/sample/adverts":{"get":{"operationId":"SampleAdvertsController_GetSampleAdverts","summary":"Get a sample of ads","description":"Get a sample of ads","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/AdvertDto"}}}}]}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Sample Adverts"]}},"/v2/protected/adverts/search/alerts/history/{flxId}":{"get":{"operationId":"SaveSearchAdvertsHistoryController_getProperty","summary":"Get history of match adverts by its saved search flxId","description":"Get history of the adverts matched to a saved search by its flxId. The history is composed of all the adverts that have been match for this saved search.","parameters":[{"name":"skip","required":false,"in":"query","description":"Skip the first N results","schema":{"type":"number"}},{"name":"take","required":false,"in":"query","description":"Take the first N results","schema":{"type":"number"}},{"name":"flxId","required":true,"in":"path","description":"The flxId of the saved search","schema":{"type":"string"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"allOf":[{"$ref":"#/components/schemas/OkResponseAnyDto"},{"properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/AdvertDto"}}}}]}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Adverts Alerts"],"security":[{"x-api-key":[]}]}},"/v2/protected/experimental/analytics":{"post":{"operationId":"AnalyticsController_getAnalytics","summary":"Get analytics data for a given context (property, location, ...) ","description":"Get analytics data for a given context","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AnalyticsGeneralAnalyticsRequestDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"properties":{"data":{"type":"object","$ref":"#/components/schemas/AnalyticsAnalysisDto"}}}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Analytics"],"security":[{"x-api-key":[]}]}},"/v2/protected/experimental/estimate":{"post":{"operationId":"EstimationsController_estimate","summary":"Estimate the price of a property","description":"Estimate the price of a property based on market data","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ArtificialimmoMarketEstimateRequestDto"}}}},"responses":{"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""},"default":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ArtificialimmoEstimationResponseDto"}}}}},"tags":["Estimations"],"security":[{"x-api-key":[]}]}},"/v2/sample/webhook/adverts":{"get":{"operationId":"SampleWebhookAdvertsController_GetSampleWebhookAdverts","summary":"Sample advert webhook body","description":"Sample of an alert webhook body for Adverts","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SampleWebhookAdvertsResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Sample Adverts"]}},"/v2/sample/webhook/properties":{"get":{"operationId":"SampleWebhookPropertiesController_GetSampleWebhookProperties","summary":"Sample Properties webhook body","description":"Sample of an alert webhook body for Properties","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SampleWebhookPropertiesResponseDto"}}}},"400":{"content":{"application/json":{"example":{"error":{"message":"Unexpected Error","code":10003}}}},"description":""}},"tags":["Sample Properties"]}}},"info":{"title":"Real-estate data API - Fluximmo V2","description":"## Fluximmo\n##### Real-time real estate data: Power workflows, business applications and decision-making.\n\nReal estate expert since 2017, Fluximmo aggregates, exploits, enriches & analyzes the \n\nreal-estate market in real time to offer data flows, APIs and innovative services to real estate professionals.\n\n## Authentification\nYou'll need to be authenticated with an active subscription to access our REST endpoints.\n\nTo get an API-KEY please contact us at contact@fluximmo.com or book a call with our team: https://calendly.com/fluximmo/meet-fluximmo\n##### How to use your API KEY\nSimply add to your HTTP request your API KEY in the headers: `{'x-api-key':'randomApiKey'}`\n\n## Properties and Adverts\nReal-estate market can be conceptualized in different ways. We offer two different conceptualization depending on your needs: Properties & Adverts.\n#### Properties (BAAS)\nA property is a real-estate habitation/land/commercial/building to which is attached adverts.\n\nWe gather all the adverts offering (selling or renting) this real-estate asset and consolidate all the information into one Property.\n\nA Property is by definition `de-duplicated` and can gather 1 to x adverts: these adverts are either duplicates from different portals or with mandates from different agencies or republication of the same advertising with a price update or not.\n\nThe concept of property is in constant mutation until the real-estate asset is sold: We'll keep merging new adverts within the Property concept and update the price if needed.\n\nBy it's nature in constant mutation, we do not offer the possibility to receive these Properties on webhooks. You'll need to use our APIs as a Backend As A Service (BaaS).\n\n#### Adverts (BAAS and WEBHOOK)\nAdverts are advertising of a real-estate property. Adverts can come from many sources: Agencies websites, Aggregation real-estate portals, Social-Networks, NewsPaper etc...\n\nAfter gathering all these adverts our proprietary AI algorithms will de-duplicate these adverts and associate them to a Property\n\nAn advert have a unique URL. Meaning that the same advertising re-published twice (with our without any change, on the same website or not, by the same agency or not) is considered as 2 ads.\n\nYou can choose either to retrieve all the Adverts or only the non duplicated ones. Adverts can be retrieved either by API (Search or Alerts) or Webhook\n## Webhooks\nWe offer the possibility to receive our real-estate Adverts data in real-time using webhooks. As soon as we gather the data, you'll receive it few moments later.\n\nUsing ALERTS, you can receive new adverts matching your criteria on a webhook.\n\n##### Webhook differences between Adverts and Properties\nAs Properties are by nature in perpetual evolutions (new duplicated ads will be merged, new data to be consolidated etc..), we do not offer the possibility to receive through Webhooks the full body of the properties. Properties webhook will only send you the list of the properties FlxIds matching your search.\n\nYou'll find below the schema of the data you would receive on your webhook (`/v2/sample/webhook/properties`, `/v2/sample/webhook/adverts`)\n##### What is a webhook\nA webhook can be thought of as a type of API that is driven by events rather than requests\n\n.Instead of one application making a request to another to receive a response, a webhook is a service that allows one program to send data to another as soon as a particular event takes place.\n\nWebhooks are sometimes referred to as “reverse APIs,” because communication is initiated by the application sending the data rather than the one receiving it.\n\nWith web services becoming increasingly interconnected, webhooks are seeing more action as a lightweight solution for enabling real-time notifications and data updates without the need to develop a full-scale API.\n##### When to use a webhook instead of the REST API\nYou're supposed to receive a high volume of data (frequently or not), you're looking for real-time data, you just have to relax and wait (no cron, no call on our API etc..)\n##### Webhook implementation examples\nA webhook is simply a POST endpoint we can request\n* Python: https://gist.github.com/aloysius-tim/293772256526efa20d5c625c6ace036a\n* Node: https://gist.github.com/aloysius-tim/ea1d9feb2c527b5b09ffc356b662d14b\n\n","version":"2.0.0","contact":{},"x-logo":{"url":"https://www.fluximmo.com/assets/images/logo_text.png","backgroundColor":"#F31051","altText":"Fluximmo logo"}},"tags":[{"name":"PropertyModel","description":"<SchemaDefinition schemaRef=\"#/components/schemas/PropertyDto\" />"},{"name":"AdvertModel","description":"<SchemaDefinition schemaRef=\"#/components/schemas/AdvertDto\" />"}],"servers":[{"url":"https://api.fluximmo.io"}],"components":{"securitySchemes":{"x-api-key":{"type":"apiKey","in":"header","name":"x-api-key"}},"schemas":{"VersionRes":{"properties":{"data":{"type":"object","properties":{"version":{"type":"string","readOnly":true,"example":"v1.0.0"}},"required":["version"]}},"required":["data"],"type":"object"},"OkResponseAnyDto":{"properties":{"data":{"type":"object","properties":{"data":{"type":"object"}},"required":["data"]}},"required":["data"],"type":"object"},"String":{"type":"object","properties":{}},"EnumSearchRequestOrderByDto":{"type":"string","enum":["ASC","DESC"]},"IntRangeDto":{"type":"object","properties":{"max":{"type":"number","description":"The maximum value of the range"},"min":{"type":"number","description":"The minimum value of the range"}}},"FilterAdvertPriceDto":{"type":"object","properties":{"value":{"description":"The value of the price in €","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"valuePerArea":{"description":"The value of the price per m² in €","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]}}},"CharacteristicsDto":{"type":"object","properties":{"hasAlarm":{"type":"boolean"},"hasBalcony":{"type":"boolean"},"hasCellar":{"type":"boolean"},"hasConcierge":{"type":"boolean"},"hasDigicode":{"type":"boolean"},"hasFireplace":{"type":"boolean"},"hasGarage":{"type":"boolean"},"hasGarden":{"type":"boolean"},"hasGrenier":{"type":"boolean"},"hasInterphone":{"type":"boolean"},"hasJacuzzi":{"type":"boolean"},"hasLand":{"type":"boolean"},"hasLift":{"type":"boolean"},"hasMezzanine":{"type":"boolean"},"hasParking":{"type":"boolean"},"hasPool":{"type":"boolean"},"hasTerrace":{"type":"boolean"},"hasVisAVis":{"type":"boolean"},"isPeaceful":{"type":"boolean"}}},"EnumGreenhouseClassificationDto":{"type":"string","enum":["GREENHOUSE_CLASSIFICATION_UNKNOWN","GREENHOUSE_CLASSIFICATION_G","GREENHOUSE_CLASSIFICATION_F","GREENHOUSE_CLASSIFICATION_E","GREENHOUSE_CLASSIFICATION_D","GREENHOUSE_CLASSIFICATION_C","GREENHOUSE_CLASSIFICATION_B","GREENHOUSE_CLASSIFICATION_A","GREENHOUSE_CLASSIFICATION_NC"]},"EnumEnergyClassificationDto":{"type":"string","enum":["ENERGY_CLASSIFICATION_UNKNOWN","ENERGY_CLASSIFICATION_G","ENERGY_CLASSIFICATION_F","ENERGY_CLASSIFICATION_E","ENERGY_CLASSIFICATION_D","ENERGY_CLASSIFICATION_C","ENERGY_CLASSIFICATION_B","ENERGY_CLASSIFICATION_A","ENERGY_CLASSIFICATION_NC"]},"FilterClimateDto":{"type":"object","properties":{"epcClimate":{"type":"array","example":"GREENHOUSE_CLASSIFICATION_UNKNOWN","description":"The classification value of the greenhouse gas emission classification - GES","items":{"$ref":"#/components/schemas/EnumGreenhouseClassificationDto"}},"epcClimateScore":{"description":"The value of the greenhouse gas emission classification - GES in kgCO2/m²/year","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"epcEnergy":{"type":"array","example":"ENERGY_CLASSIFICATION_UNKNOWN","description":"The classification value of the energy classification - DPE","items":{"$ref":"#/components/schemas/EnumEnergyClassificationDto"}},"epcEnergyScore":{"description":"The value of the energy classification - DPE in kWhEP/m²/year","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]}}},"EnumConstructionMaterialDto":{"type":"string","enum":["MATERIAL_UNKNOWN","MATERIAL_WOODEN","MATERIAL_STEEL","MATERIAL_STONE","MATERIAL_PVC","MATERIAL_CONCRETE","MATERIAL_ALUMINIUM","MATERIAL_HALF_TIMBERED","MATERIAL_MARBLE","MATERIAL_BRICK","MATERIAL_CINDER_BLOCK","MATERIAL_PREFABRICATED","MATERIAL_ADOBE","MATERIAL_COATING"]},"EnumExposureDto":{"type":"string","enum":["EXPOSURE_UNKNOWN","EXPOSURE_NORTH","EXPOSURE_NORTH_EAST","EXPOSURE_EAST","EXPOSURE_SOUTH_EAST","EXPOSURE_SOUTH","EXPOSURE_SOUTH_WEST","EXPOSURE_WEST","EXPOSURE_NORTH_WEST"]},"EnumFurnitureDto":{"type":"string","enum":["UNKNOWN_FURNITURE","UNFURNISHED","PARTIALLY_FURNISHED","FULLY_FURNISHED"]},"EnumViewTypeDto":{"type":"string","enum":["VIEW_TYPE_UNKNOWN","VIEW_TYPE_GLIMPSE","VIEW_TYPE_PANORAMIC","VIEW_TYPE_CLEAR","VIEW_TYPE_EXCEPTIONAL","VIEW_TYPE_DOMINANT"]},"EnumGlazingTypeDto":{"type":"string","enum":["GLAZING_TYPE_UNKNOWN","GLAZING_TYPE_SIMPLE","GLAZING_TYPE_DOUBLE","GLAZING_TYPE_TRIPLE"]},"EnumViewOnDto":{"type":"string","enum":["VIEW_ON_UNKNOWN","VIEW_ON_SEA","VIEW_ON_HILLS","VIEW_ON_RIVERS","VIEW_ON_CITY","VIEW_ON_PARK","VIEW_ON_VERDURE","VIEW_ON_STREET","VIEW_ON_COURTYARD","VIEW_ON_COUNTRYSIDE","VIEW_ON_MOUNTAIN","VIEW_ON_GARDEN_TERRACE","VIEW_ON_LAKE","VIEW_ON_SKI_SLOPES","VIEW_ON_PORT","VIEW_ON_POI","VIEW_ON_SKY","VIEW_ON_WATER","VIEW_ON_VINEYARD","VIEW_ON_ROOF"]},"FilterFeaturesDto":{"type":"object","properties":{"claddingMaterials":{"type":"array","example":"MATERIAL_UNKNOWN","items":{"$ref":"#/components/schemas/EnumConstructionMaterialDto"}},"exposure":{"type":"array","example":"EXPOSURE_UNKNOWN","items":{"$ref":"#/components/schemas/EnumExposureDto"}},"furniture":{"type":"array","example":"UNKNOWN_FURNITURE","items":{"$ref":"#/components/schemas/EnumFurnitureDto"}},"propertyFloor":{"$ref":"#/components/schemas/IntRangeDto"},"propertyTotalFloor":{"$ref":"#/components/schemas/IntRangeDto"},"viewType":{"type":"array","example":"VIEW_TYPE_UNKNOWN","items":{"$ref":"#/components/schemas/EnumViewTypeDto"}},"constructionMaterials":{"type":"array","example":"MATERIAL_UNKNOWN","items":{"$ref":"#/components/schemas/EnumConstructionMaterialDto"}},"glazingTypes":{"type":"array","example":"GLAZING_TYPE_UNKNOWN","items":{"$ref":"#/components/schemas/EnumGlazingTypeDto"}},"hasThroughExposure":{"type":"boolean"},"viewOns":{"type":"array","example":"VIEW_ON_UNKNOWN","items":{"$ref":"#/components/schemas/EnumViewOnDto"}},"viewTypes":{"type":"array","example":"VIEW_TYPE_UNKNOWN","items":{"$ref":"#/components/schemas/EnumViewTypeDto"}}}},"EnumHeatTypeDto":{"type":"string","enum":["HEAT_TYPE_UNKNOWN","HEAT_TYPE_INDIVIDUAL","HEAT_TYPE_SHARE","HEAT_TYPE_MIX","HEAT_TYPE_CITY","HEAT_TYPE_CISTERN"]},"EnumHeatTypeDetailDto":{"type":"string","enum":["HEAT_DETAIL_UNKNWON","HEAT_DETAIL_FLOOR","HEAT_DETAIL_CEILING","HEAT_DETAIL_FIREPLACE","HEAT_DETAIL_INSERT","HEAT_DETAIL_AIR_CON","HEAT_DETAIL_REVERSIBLE_AIR_CON","HEAT_DETAIL_RADIANTS_TUBES","HEAT_DETAIL_RADIATOR","HEAT_DETAIL_SHEAHS","HEAT_DETAIL_CONVECTOR"]},"EnumHeatingDto":{"type":"string","enum":["HEATING_UNKNOWN","HEATING_FUEL_OIL","HEATING_ELECTRICAL","HEATING_GAS","HEATING_BIOMASS","HEATING_SOLAR","HEATING_GEOTHERMAL","HEATING_WOOD","HEATING_HEAT_PUMP","HEATING_PELLET","HEATING_CANADIAN_WELL","HEATING_COAL"]},"EnumPropertyInteriorConditionDto":{"type":"string","enum":["INTERIOR_CONDITION_UNKNWON","INTERIOR_CONDITION_EXCELLENT","INTERIOR_CONDITION_TO_REFRESH","INTERIOR_CONDITION_SMALL_WORKS_TO_BE_PLANNED","INTERIOR_CONDITION_MAJOR_WORKS_TO_BE_PALLNED","INTERIOR_CONDITION_BRAND_NEW","INTERIOR_CONDITION_GOOD_CONDITION","INTERIOR_CONDITION_TO_BE_RENOVATED"]},"EnumPropertyGeneralConditionDto":{"type":"string","enum":["GENERAL_CONDITION_UNKNOWN","GENERAL_CONDITION_TO_BE_RENOVATED","GENERAL_CONDITION_BRAND_NEW","GENERAL_CONDITION_RENOVATED","GENERAL_CONDITION_TO_BE_REFRESHED","GENERAL_CONDITION_GOOD","GENERAL_CONDITION_EXCELLENT","GENERAL_CONDITION_DECREPIT","GENERAL_CONDITION_TO_BE_BUILT"]},"PropertyConditionDto":{"type":"object","properties":{"constructionYear":{"type":"number"},"interiorCondition":{"example":"INTERIOR_CONDITION_UNKNWON","$ref":"#/components/schemas/EnumPropertyInteriorConditionDto"},"renovationYear":{"type":"number"},"generalConditions":{"type":"array","example":"GENERAL_CONDITION_UNKNOWN","items":{"$ref":"#/components/schemas/EnumPropertyGeneralConditionDto"}}}},"FilterSurfaceDto":{"type":"object","properties":{"balconies":{"description":"The surface of the balconies in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"floorSpace":{"description":"The surface of the total floors in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"gardens":{"description":"The surface of the gardens in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"groundFloor":{"description":"The surface of the ground floor in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"kitchen":{"description":"The surface of the kitchen in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"livingSpace":{"description":"The surface of the living space in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"livingroom":{"description":"The surface of the living room in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"terraces":{"description":"The surface of the terraces in m² - we rarely have this information","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]},"total":{"description":"The total habitable surface of the property in m²","allOf":[{"$ref":"#/components/schemas/IntRangeDto"}]}}},"EnumPropertyTypeHabitationDto":{"type":"string","enum":["PROPERTY_TYPE_UNKNOWN","PROPERTY_TYPE_STUDIO","PROPERTY_TYPE_T1","PROPERTY_TYPE_T1_T2","PROPERTY_TYPE_T2","PROPERTY_TYPE_T2_T3","PROPERTY_TYPE_T3","PROPERTY_TYPE_T3_4","PROPERTY_TYPE_T4","PROPERTY_TYPE_T4_5","PROPERTY_TYPE_T5_MORE","PROPERTY_TYPE_LOFT","PROPERTY_TYPE_DUPLEX","PROPERTY_TYPE_OTHER_APARTMENT_TYPE","PROPERTY_TYPE_INDIVIDUAL","PROPERTY_TYPE_ONE_SIDE_TERRACED","PROPERTY_TYPE_TWO_SIDE_TERRACED","PROPERTY_TYPE_SINGLE_STOREY","PROPERTY_TYPE_TRADITIONAL","PROPERTY_TYPE_CONTEMPORARY","PROPERTY_TYPE_BOURGEOIS","PROPERTY_TYPE_VILLA","PROPERTY_TYPE_MANOR","PROPERTY_TYPE_CASTLE","PROPERTY_TYPE_FARM","PROPERTY_TYPE_MAS","PROPERTY_TYPE_BASTIDE","PROPERTY_TYPE_CHALET","PROPERTY_TYPE_ANCIENT","PROPERTY_TYPE_HERITAGE_LISTED","PROPERTY_TYPE_BUNGALOW"]},"FilterTypeHabitationDto":{"type":"object","properties":{"bathroomCount":{"$ref":"#/components/schemas/IntRangeDto"},"bedroomCount":{"$ref":"#/components/schemas/IntRangeDto"},"characteristics":{"$ref":"#/components/schemas/CharacteristicsDto"},"climate":{"$ref":"#/components/schemas/FilterClimateDto"},"features":{"$ref":"#/components/schemas/FilterFeaturesDto"},"heatTypes":{"type":"array","example":"HEAT_TYPE_UNKNOWN","items":{"$ref":"#/components/schemas/EnumHeatTypeDto"}},"heatTypeDetails":{"type":"array","example":"HEAT_DETAIL_UNKNWON","items":{"$ref":"#/components/schemas/EnumHeatTypeDetailDto"}},"heatings":{"type":"array","example":"HEATING_UNKNOWN","items":{"$ref":"#/components/schemas/EnumHeatingDto"}},"propertyCondition":{"type":"array","items":{"$ref":"#/components/schemas/PropertyConditionDto"}},"roomCount":{"$ref":"#/components/schemas/IntRangeDto"},"surface":{"$ref":"#/components/schemas/FilterSurfaceDto"},"type":{"example":"PROPERTY_TYPE_UNKNOWN","$ref":"#/components/schemas/EnumPropertyTypeHabitationDto"},"wcCount":{"$ref":"#/components/schemas/IntRangeDto"}}},"EnumLandTypeDto":{"type":"string","enum":["LAND_UNKNWON","LAND_BUILDING_PLOT","LAND_AGRICULTURAL","LAND_VINEYARD","LAND_INDUSTRIAL","LAND_POND","LAND_FOREST"]},"FilterTypeLandDto":{"type":"object","properties":{"canConstruct":{"type":"boolean"},"isServiced":{"type":"boolean"},"surface":{"$ref":"#/components/schemas/IntRangeDto"},"surfaceConstructable":{"$ref":"#/components/schemas/IntRangeDto"},"type":{"type":"array","example":"LAND_UNKNWON","items":{"$ref":"#/components/schemas/EnumLandTypeDto"}},"haveBuildingPermit":{"type":"boolean"},"haveElectricity":{"type":"boolean"},"haveTelecom":{"type":"boolean"},"haveWater":{"type":"boolean"}}},"FilterDateRangeDto":{"type":"object","properties":{"max":{"format":"date-time","type":"string","description":"Date filter - Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"min":{"format":"date-time","type":"string","description":"Date filter - Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"}}},"FilterOfferRentingContractDto":{"type":"object","properties":{"isColocation":{"type":"boolean"},"isLongTerm":{"type":"boolean"},"isShortTerm":{"type":"boolean"},"isSubLease":{"type":"boolean"}}},"EnumPropertyOfferTypeDto":{"type":"string","enum":["OFFER_UNKNOWN","OFFER_BUY","OFFER_RENT","OFFER_BUSINESS_TAKE_OVER","OFFER_LEASE_BACK","OFFER_LIFE_ANNUITY_SALE","OFFER_HOLIDAYS"]},"FilterOfferDto":{"type":"object","properties":{"isCurrentlyOccupied":{"type":"boolean"},"renting":{"$ref":"#/components/schemas/FilterOfferRentingContractDto"},"type":{"example":"OFFER_UNKNOWN","$ref":"#/components/schemas/EnumPropertyOfferTypeDto"}}},"EnumParkingTypeDto":{"type":"string","enum":["PARKING_UNKNOWN","PARKING_GARAGE","PARKING_PARKING"]},"FilterTypeParkingDto":{"type":"object","properties":{"count":{"$ref":"#/components/schemas/IntRangeDto"},"numberOfCars":{"$ref":"#/components/schemas/IntRangeDto"},"surface":{"$ref":"#/components/schemas/IntRangeDto"},"type":{"type":"array","example":"PARKING_UNKNOWN","items":{"$ref":"#/components/schemas/EnumParkingTypeDto"}}}},"EnumPropertyProcessDto":{"type":"string","enum":["PROCESS_UNKNOWN","PROCESS_AVAILABLE_ON_MARKET","PROCESS_UNDER_COMPROMISE","PROCESS_RENTED_SOLD","PROCESS_REMOVED","PROCESS_RESERVED","PROCESS_ARCHIVED"]},"EnumPricingScopeDto":{"type":"string","enum":["PRICING_ONE_OFF","PRICING_MENSUAL"]},"EnumPropertyClassDto":{"type":"string","enum":["CLASS_UNKNWON","CLASS_HOUSE","CLASS_FLAT","CLASS_PROGRAM","CLASS_SHOP","CLASS_PREMISES","CLASS_OFFICE","CLASS_LAND","CLASS_BUILDING","CLASS_PARKING"]},"FilterDoubleRangeDto":{"type":"object","properties":{"max":{"type":"number"},"min":{"type":"number"}}},"LatLngDto":{"type":"object","properties":{"lat":{"type":"number","description":"Latitude"},"lon":{"type":"number","description":"Longitude"}}},"FilterLatLngGeoBoundingBoxDto":{"type":"object","properties":{"bottomRight":{"$ref":"#/components/schemas/LatLngDto"},"topLeft":{"$ref":"#/components/schemas/LatLngDto"}}},"FilterLatLngGeoDistanceDto":{"type":"object","properties":{"distanceKm":{"type":"number"},"pin":{"$ref":"#/components/schemas/LatLngDto"}}},"FilterLatLngDto":{"type":"object","properties":{"geoBoundingBox":{"$ref":"#/components/schemas/FilterLatLngGeoBoundingBoxDto"},"geoDistance":{"$ref":"#/components/schemas/FilterLatLngGeoDistanceDto"}}},"FilterCompleteLatLngDto":{"type":"object","properties":{"location":{"description":"Filter by location geo coordinates","allOf":[{"$ref":"#/components/schemas/FilterLatLngDto"}]}}},"FilterLocationDto":{"type":"object","properties":{"city":{"type":"string"},"cityCoordinate":{"$ref":"#/components/schemas/FilterCompleteLatLngDto"},"department":{"type":"string"},"inseeCode":{"type":"string"},"irisCode":{"type":"string"},"locationCoordinate":{"$ref":"#/components/schemas/FilterCompleteLatLngDto"},"postalCode":{"type":"string"}}},"FilterSourceDto":{"type":"object","properties":{"flxId":{"type":"array","items":{"type":"string"}},"url":{"type":"array","items":{"type":"string"}},"website":{"type":"array","items":{"type":"string"}}}},"EnumCurrencyDto":{"type":"string","enum":["CURRENCY_EUR","CURRENCY_USD"]},"EnumSellerTypeDto":{"type":"string","enum":["SELLER_TYPE_UNKNOWN","SELLER_TYPE_AGENCY","SELLER_TYPE_NETWORK"]},"LightSellerDto":{"type":"object","properties":{"flxId":{"type":"string"},"name":{"type":"string"},"siren":{"type":"string"},"type":{"example":"SELLER_TYPE_UNKNOWN","$ref":"#/components/schemas/EnumSellerTypeDto"}}},"FilterAdvertDto":{"type":"object","properties":{"currentPrice":{"$ref":"#/components/schemas/FilterAdvertPriceDto"},"habitation":{"$ref":"#/components/schemas/FilterTypeHabitationDto"},"isAuction":{"type":"boolean"},"isUrgent":{"type":"boolean"},"land":{"$ref":"#/components/schemas/FilterTypeLandDto"},"lastModifiedAt":{"type":"array","items":{"$ref":"#/components/schemas/FilterDateRangeDto"}},"offer":{"type":"array","items":{"$ref":"#/components/schemas/FilterOfferDto"}},"parking":{"$ref":"#/components/schemas/FilterTypeParkingDto"},"process":{"type":"array","example":"PROCESS_UNKNOWN","items":{"$ref":"#/components/schemas/EnumPropertyProcessDto"}},"scope":{"type":"array","example":"PRICING_ONE_OFF","items":{"$ref":"#/components/schemas/EnumPricingScopeDto"}},"tags":{"type":"array","items":{"type":"string"}},"type":{"type":"array","example":"CLASS_UNKNWON","items":{"$ref":"#/components/schemas/EnumPropertyClassDto"}},"warrantyDeposit":{"$ref":"#/components/schemas/FilterDoubleRangeDto"},"firstSeenAt":{"type":"array","items":{"$ref":"#/components/schemas/FilterDateRangeDto"}},"location":{"$ref":"#/components/schemas/FilterLocationDto"},"source":{"$ref":"#/components/schemas/FilterSourceDto"},"currency":{"type":"array","example":"EUR","items":{"$ref":"#/components/schemas/EnumCurrencyDto"}},"mainPropertyAdFlxId":{"type":"array","items":{"type":"string"}},"propertyFlxId":{"type":"array","items":{"type":"string"}},"isPro":{"type":"boolean"},"seller":{"type":"array","items":{"$ref":"#/components/schemas/LightSellerDto"}}}},"SearchAdvertQueryDto":{"type":"object","properties":{"filterAd":{"$ref":"#/components/schemas/FilterAdvertDto"},"fullTexts":{"description":"Search terms for full text search. We'll search in title, description, and keywords for terms similar to these (typically, we'll use a fuzzy search).","type":"array","items":{"type":"string"}},"keywords":{"description":"Search terms for keyword search. We'll search in title, description, and keywords for exact matches to these terms (typically, we'll use a term search).","type":"array","items":{"type":"string"}}},"required":["filterAd","fullTexts","keywords"]},"EnumSearchRequestSortByDto":{"type":"string","enum":["RELEVANCE","PRICE","FIRST_SEEN_AT","LAST_UPDATED_AT","LAST_SEEN_AT"]},"SearchAdvertPayloadDto":{"type":"object","properties":{"orderBy":{"example":"ASC","$ref":"#/components/schemas/EnumSearchRequestOrderByDto"},"search":{"$ref":"#/components/schemas/SearchAdvertQueryDto"},"searchAfterHash":{"type":"string"},"size":{"type":"number"},"sortBy":{"example":"RELEVANCE","$ref":"#/components/schemas/EnumSearchRequestSortByDto"}},"required":["orderBy","search","size","sortBy"]},"AdvertPriceDto":{"type":"object","properties":{"value":{"type":"number","description":"The value of the price in €"},"valuePerArea":{"type":"number","description":"The value of the price per area in €"}}},"ClimateDto":{"type":"object","properties":{"epcClimate":{"example":"GREENHOUSE_CLASSIFICATION_UNKNOWN","description":"The classification value of the greenhouse gas emission classification - GES","$ref":"#/components/schemas/EnumGreenhouseClassificationDto"},"epcClimateScore":{"type":"number","description":"The value of the greenhouse gas emission classification - GES in kgCO2/m²/year"},"epcEnergy":{"example":"ENERGY_CLASSIFICATION_UNKNOWN","description":"The classification value of the energy classification - DPE","$ref":"#/components/schemas/EnumEnergyClassificationDto"},"epcEnergyScore":{"type":"number","description":"The value of the energy classification - DPE in kWhEP/m²/year"}}},"FeaturesDto":{"type":"object","properties":{"exposure":{"example":"EXPOSURE_UNKNOWN","$ref":"#/components/schemas/EnumExposureDto"},"furniture":{"example":"UNKNOWN_FURNITURE","$ref":"#/components/schemas/EnumFurnitureDto"},"propertyFloor":{"type":"number"},"propertyTotalFloor":{"type":"number"},"viewTypes":{"type":"array","example":"VIEW_TYPE_UNKNOWN","items":{"$ref":"#/components/schemas/EnumViewTypeDto"}},"constructionMaterials":{"type":"array","example":"MATERIAL_UNKNOWN","items":{"$ref":"#/components/schemas/EnumConstructionMaterialDto"}},"hasThroughExposure":{"type":"boolean"},"viewOns":{"type":"array","example":"VIEW_ON_UNKNOWN","items":{"$ref":"#/components/schemas/EnumViewOnDto"}}}},"SurfaceDto":{"type":"object","properties":{"balconies":{"type":"number","description":"The surface of the balconies in m² - we rarely have this information"},"floorSpace":{"type":"number","description":"The surface of the total floors in m² - we rarely have this information"},"gardens":{"type":"number","description":"The surface of the gardens in m² - we rarely have this information"},"groundFloor":{"type":"number","description":"The surface of the ground floor in m² - we rarely have this information"},"kitchen":{"type":"number","description":"The surface of the kitchen in m² - we rarely have this information"},"livingSpace":{"type":"number","description":"The surface of the living space in m² - we rarely have this information"},"livingRoom":{"type":"number","description":"The surface of the living room in m² - we rarely have this information"},"terraces":{"type":"number","description":"The surface of the terraces in m² - we rarely have this information"},"total":{"type":"number","description":"The total habitable surface of the property in m²"}}},"TypeHabitationDto":{"type":"object","properties":{"bathroomCount":{"type":"number"},"bedroomCount":{"type":"number"},"characteristics":{"$ref":"#/components/schemas/CharacteristicsDto"},"climate":{"description":"The energetic classes of the property (DPE/GES)","allOf":[{"$ref":"#/components/schemas/ClimateDto"}]},"features":{"$ref":"#/components/schemas/FeaturesDto"},"heatTypes":{"type":"array","example":["HEAT_TYPE_UNKNOWN"],"items":{"$ref":"#/components/schemas/EnumHeatTypeDto"}},"heatTypeDetails":{"type":"array","example":["HEAT_DETAIL_UNKNWON"],"items":{"$ref":"#/components/schemas/EnumHeatTypeDetailDto"}},"heatings":{"type":"array","example":["HEATING_UNKNOWN"],"items":{"$ref":"#/components/schemas/EnumHeatingDto"}},"propertyCondition":{"$ref":"#/components/schemas/PropertyConditionDto"},"roomCount":{"type":"number"},"surface":{"$ref":"#/components/schemas/SurfaceDto"},"type":{"example":["PROPERTY_TYPE_UNKNOWN"],"$ref":"#/components/schemas/EnumPropertyTypeHabitationDto"},"wcCount":{"type":"number"}}},"TypeLandDto":{"type":"object","properties":{"canConstruct":{"type":"boolean"},"hasBuildingPermit":{"type":"boolean"},"hasElectricity":{"type":"boolean"},"hasTelecom":{"type":"boolean"},"hasWater":{"type":"boolean"},"isServiced":{"type":"boolean"},"surface":{"type":"number"},"surfaceConstructable":{"type":"number"},"type":{"example":"LAND_UNKNWON","$ref":"#/components/schemas/EnumLandTypeDto"}}},"AdCompleteLatLngDto":{"type":"object","properties":{"location":{"description":"Longitude and latitude as an array of number, first longitude then latitude [lng, lat]","type":"array","items":{"type":"number"}}}},"AdLocationDto":{"type":"object","properties":{"city":{"type":"string"},"cityCoordinate":{"description":"City coordinates - center of the city","allOf":[{"$ref":"#/components/schemas/AdCompleteLatLngDto"}]},"department":{"type":"string"},"inseeCode":{"type":"string","description":"INSEE code of the city"},"irisCode":{"type":"string","description":"IRIS code of the city"},"locationCoordinate":{"description":"Coordinates of the property - could not be accurate or precise enough","allOf":[{"$ref":"#/components/schemas/AdCompleteLatLngDto"}]},"postalCode":{"type":"string","description":"Postal code of the city"}}},"ImageDto":{"type":"object","properties":{"url":{"type":"string"}}},"MediasDto":{"type":"object","properties":{"images":{"type":"array","items":{"$ref":"#/components/schemas/ImageDto"}},"virtualVisitExternalUrl":{"type":"array","items":{"type":"string"}}}},"TypeParkingDto":{"type":"object","properties":{"count":{"type":"number"},"numberOfCars":{"type":"number"},"surface":{"type":"number"},"type":{"example":"PARKING_UNKNOWN","$ref":"#/components/schemas/EnumParkingTypeDto"}}},"SourceDto":{"type":"object","properties":{"flxId":{"type":"string"},"url":{"type":"string"},"website":{"type":"string"}}},"OfferRentingContractDto":{"type":"object","properties":{"isColocation":{"type":"boolean","description":"The offer is for a colocation"},"isLongTerm":{"type":"boolean","description":"The offer is for long term renting (more than 6 months)"},"isShortTerm":{"type":"boolean","description":"The offer is for short term renting (less than 6 months)"},"isSubLease":{"type":"boolean","description":"The offer is for a sublease"}}},"OfferDto":{"type":"object","properties":{"isCurrentlyOccupied":{"type":"boolean","description":"The property is sold with someone living in it"},"renting":{"description":"Renting contract details","allOf":[{"$ref":"#/components/schemas/OfferRentingContractDto"}]},"type":{"example":"OFFER_UNKNOWN","$ref":"#/components/schemas/EnumPropertyOfferTypeDto"}}},"AdvertDto":{"type":"object","properties":{"currency":{"example":"EUR","description":"Currency of the advert","$ref":"#/components/schemas/EnumCurrencyDto"},"currentPrice":{"description":"Current price of the advert","allOf":[{"$ref":"#/components/schemas/AdvertPriceDto"}]},"description":{"type":"string","description":"Description of the advert as it is on the source"},"firstSeenAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"flxId":{"type":"string","description":"Unique identifier of the advert"},"habitation":{"description":"Habitation details of the property","allOf":[{"$ref":"#/components/schemas/TypeHabitationDto"}]},"isAuction":{"type":"boolean","description":"Is this advert an auction"},"isUrgent":{"type":"boolean","description":"Is this advert marked as urgent"},"land":{"description":"Land details of the property","allOf":[{"$ref":"#/components/schemas/TypeLandDto"}]},"lastModifiedAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"location":{"description":"Location details of the advert","allOf":[{"$ref":"#/components/schemas/AdLocationDto"}]},"medias":{"description":"Medias of the advert","allOf":[{"$ref":"#/components/schemas/MediasDto"}]},"parking":{"description":"Parking details of the property","allOf":[{"$ref":"#/components/schemas/TypeParkingDto"}]},"scope":{"example":"PRICING_ONE_OFF","description":"Pricing scope of the advert - mensual or onetime","$ref":"#/components/schemas/EnumPricingScopeDto"},"source":{"description":"Source of the advert","allOf":[{"$ref":"#/components/schemas/SourceDto"}]},"tags":{"description":"Unstructured tags of the advert","type":"array","items":{"type":"string"}},"title":{"type":"string","description":"Title of the advert as it is on the source"},"type":{"example":"CLASS_UNKNWON","description":"Type of the advert","$ref":"#/components/schemas/EnumPropertyClassDto"},"warrantyDeposit":{"type":"number","description":"Warranty deposit for renting this property"},"offer":{"description":"Offer details of the advert","allOf":[{"$ref":"#/components/schemas/OfferDto"}]},"mainPropertyAdFlxId":{"type":"string","description":"FlxId of the first duplicated advert we found for this advertised property"},"propertyFlxId":{"type":"string","description":"FlxId of the property this advert is linked to"},"isOnline":{"type":"boolean","description":"Is the advert online or not"},"lastSeenAt":{"format":"date-time","type":"string","description":"Last time we saw this advert"},"isPro":{"type":"boolean","description":"Is the seller a professional or not"},"seller":{"description":"Seller details of the advert","allOf":[{"$ref":"#/components/schemas/LightSellerDto"}]}}},"SearchAdvertsResponseDto":{"properties":{"data":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/components/schemas/AdvertDto"}},"searchAfterHash":{"type":"string"}},"required":["items"]}},"required":["data"],"type":"object"},"FilterPropertyPriceDto":{"type":"object","properties":{"source":{"$ref":"#/components/schemas/FilterSourceDto"},"value":{"$ref":"#/components/schemas/IntRangeDto"},"valuePerArea":{"$ref":"#/components/schemas/IntRangeDto"}}},"FilterVariationDto":{"type":"object","properties":{"sinceLastModified":{"description":"The value of the price variation in %","allOf":[{"$ref":"#/components/schemas/FilterDoubleRangeDto"}]},"sincePublished":{"description":"The value of the price variation in %","allOf":[{"$ref":"#/components/schemas/FilterDoubleRangeDto"}]}}},"FilterPriceDto":{"type":"object","properties":{"currency":{"type":"array","example":"EUR","items":{"$ref":"#/components/schemas/EnumCurrencyDto"}},"initial":{"$ref":"#/components/schemas/FilterPropertyPriceDto"},"isAuction":{"type":"boolean"},"latest":{"$ref":"#/components/schemas/FilterPropertyPriceDto"},"scope":{"type":"array","example":"PRICING_ONE_OFF","items":{"$ref":"#/components/schemas/EnumPricingScopeDto"}},"warrantyDeposit":{"$ref":"#/components/schemas/IntRangeDto"},"variation":{"type":"array","items":{"$ref":"#/components/schemas/FilterVariationDto"}}}},"FilterPropertyAdvertDto":{"type":"object","properties":{"firstSeenAt":{"$ref":"#/components/schemas/FilterDateRangeDto"},"flxId":{"type":"array","items":{"type":"string"}},"isOnline":{"type":"boolean"},"lastSeenAt":{"$ref":"#/components/schemas/FilterDateRangeDto"},"location":{"$ref":"#/components/schemas/FilterLatLngDto"},"price":{"$ref":"#/components/schemas/FilterPriceDto"},"source":{"$ref":"#/components/schemas/SourceDto"},"isPro":{"type":"boolean"},"seller":{"type":"array","items":{"$ref":"#/components/schemas/LightSellerDto"}}}},"FilterMetaDto":{"type":"object","properties":{"firstSeenAt":{"$ref":"#/components/schemas/FilterDateRangeDto"},"isTotallyOffline":{"type":"boolean"},"lastPublishedAt":{"$ref":"#/components/schemas/FilterDateRangeDto"},"lastSeenAt":{"$ref":"#/components/schemas/FilterDateRangeDto"},"lastUpdatedAt":{"$ref":"#/components/schemas/FilterDateRangeDto"}}},"FilterPropertyDto":{"type":"object","properties":{"adverts":{"type":"array","items":{"$ref":"#/components/schemas/FilterPropertyAdvertDto"}},"habitation":{"$ref":"#/components/schemas/FilterTypeHabitationDto"},"isUrgent":{"type":"boolean"},"land":{"$ref":"#/components/schemas/FilterTypeLandDto"},"location":{"type":"array","items":{"$ref":"#/components/schemas/FilterLocationDto"}},"meta":{"$ref":"#/components/schemas/FilterMetaDto"},"parking":{"$ref":"#/components/schemas/FilterTypeParkingDto"},"price":{"$ref":"#/components/schemas/FilterPriceDto"},"process":{"type":"array","example":"PROCESS_UNKNOWN","items":{"$ref":"#/components/schemas/EnumPropertyProcessDto"}},"tags":{"type":"array","items":{"type":"string"}},"type":{"type":"array","example":"CLASS_UNKNWON","items":{"$ref":"#/components/schemas/EnumPropertyClassDto"}},"offer":{"type":"array","items":{"$ref":"#/components/schemas/FilterOfferDto"}}}},"SearchPropertyQueryDto":{"type":"object","properties":{"filterProperty":{"$ref":"#/components/schemas/FilterPropertyDto"},"fullTexts":{"description":"Search terms for full text search. We'll search in title, description, and keywords for terms similar to these (typically, we'll use a fuzzy search).","type":"array","items":{"type":"string"}},"keywords":{"description":"Search terms for keyword search. We'll search in title, description, and keywords for exact matches to these terms (typically, we'll use a term search).","type":"array","items":{"type":"string"}}},"required":["filterProperty","fullTexts","keywords"]},"SearchPropertyPayloadDto":{"type":"object","properties":{"orderBy":{"example":"ASC","$ref":"#/components/schemas/EnumSearchRequestOrderByDto"},"search":{"$ref":"#/components/schemas/SearchPropertyQueryDto"},"searchAfterHash":{"type":"string"},"size":{"type":"number"},"sortBy":{"example":"RELEVANCE","$ref":"#/components/schemas/EnumSearchRequestSortByDto"}},"required":["orderBy","search","size","sortBy"]},"PropertyPriceDto":{"type":"object","properties":{"source":{"$ref":"#/components/schemas/SourceDto"},"value":{"type":"number"},"valuePerArea":{"type":"number"}}},"VariationDto":{"type":"object","properties":{"sinceLastModified":{"type":"number","description":"The value of the price variation in %"},"sincePublished":{"type":"number","description":"The value of the price variation in %"},"absoluteSinceLastModified":{"type":"number","description":"The absolute value of the price variation in %"},"absoluteSincePublished":{"type":"number","description":"The absolute value of the price variation in %"}}},"PriceDto":{"type":"object","properties":{"currency":{"example":"EUR","$ref":"#/components/schemas/EnumCurrencyDto"},"initial":{"description":"The initial price of the property - price of the first advert we found for this property","allOf":[{"$ref":"#/components/schemas/PropertyPriceDto"}]},"isAuction":{"type":"boolean"},"latest":{"description":"The latest price of the property - price of the last advert we found for this property","allOf":[{"$ref":"#/components/schemas/PropertyPriceDto"}]},"scope":{"example":"PRICING_ONE_OFF","$ref":"#/components/schemas/EnumPricingScopeDto"},"warrantyDeposit":{"type":"number"},"variation":{"description":"The variation of the price between two states of the advert","allOf":[{"$ref":"#/components/schemas/VariationDto"}]}}},"PropertyAdvertDto":{"type":"object","properties":{"description":{"type":"string"},"firstSeenAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"flxId":{"type":"string"},"isOnline":{"type":"boolean"},"lastSeenAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"location":{"description":"Longitude and latitude as an array of number, first longitude then latitude [lng, lat]","type":"array","items":{"type":"number"}},"medias":{"$ref":"#/components/schemas/MediasDto"},"price":{"$ref":"#/components/schemas/PriceDto"},"source":{"$ref":"#/components/schemas/SourceDto"},"title":{"type":"string"},"offlineAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"isPro":{"type":"boolean"},"seller":{"$ref":"#/components/schemas/LightSellerDto"}}},"CompleteLatLngDto":{"type":"object","properties":{"location":{"description":"Longitude and latitude as an array of number, first longitude then latitude [lng, lat]","type":"array","items":{"type":"number"}}}},"LocationDto":{"type":"object","properties":{"city":{"type":"string"},"cityCoordinate":{"description":"The coordinates of the city center","allOf":[{"$ref":"#/components/schemas/CompleteLatLngDto"}]},"department":{"type":"string"},"inseeCode":{"type":"string"},"irisCode":{"type":"string"},"locationCoordinate":{"description":"Coordinates of the property - could not be accurate or precise enough","allOf":[{"$ref":"#/components/schemas/CompleteLatLngDto"}]},"postalCode":{"type":"string"}}},"MetaDto":{"type":"object","properties":{"firstSeenAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"isTotallyOffline":{"type":"boolean","description":"All the adverts of this property are offline - Meaning the property is not available anymore (sold, rented, etc.)"},"lastPublishedAt":{"format":"date-time","type":"string"},"lastSeenAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"lastUpdatedAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"},"totallyOfflineAt":{"format":"date-time","type":"string","description":"Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)","example":"2022-10-21T11:31:33.593Z"}}},"PropertyDto":{"type":"object","properties":{"adverts":{"description":"List of adverts linked to this property - adverts can be from different sources, different prices, different agencies, etc.","type":"array","items":{"$ref":"#/components/schemas/PropertyAdvertDto"}},"flxId":{"type":"string","description":"Unique identifier of the property"},"habitation":{"description":"Habitation characteristics of the property","allOf":[{"$ref":"#/components/schemas/TypeHabitationDto"}]},"isUrgent":{"type":"boolean","description":"Is the property marked as urgent"},"land":{"description":"Land details of the property","allOf":[{"$ref":"#/components/schemas/TypeLandDto"}]},"location":{"description":"Location details of the property","allOf":[{"$ref":"#/components/schemas/LocationDto"}]},"meta":{"description":"Meta data of the property","allOf":[{"$ref":"#/components/schemas/MetaDto"}]},"parking":{"description":"Parking details of the property","allOf":[{"$ref":"#/components/schemas/TypeParkingDto"}]},"price":{"description":"Price details of the property","allOf":[{"$ref":"#/components/schemas/PriceDto"}]},"tags":{"description":"List of unstructured tags of the property","type":"array","items":{"type":"string"}},"type":{"example":"CLASS_UNKNWON","description":"Type of the property","$ref":"#/components/schemas/EnumPropertyClassDto"},"offer":{"description":"Offer information of the property","allOf":[{"$ref":"#/components/schemas/OfferDto"}]}}},"SearchPropertiesResponseDto":{"properties":{"data":{"type":"object","properties":{"items":{"type":"array","items":{"$ref":"#/components/schemas/PropertyDto"}},"searchAfterHash":{"type":"string"}},"required":["items"]}},"required":["data"],"type":"object"},"SaveSearchPropertiesPayloadDto":{"type":"object","properties":{"search_query":{"$ref":"#/components/schemas/SearchPropertyQueryDto"},"webhook_url":{"type":"string"},"search_name":{"type":"string"}},"required":["search_query"]},"SavedSearchResponseDto":{"properties":{"data":{"type":"object","properties":{"alert_id":{"type":"string"}},"required":["alert_id"]}},"required":["data"],"type":"object"},"ManySaveSearchPropertiesPayloadDto":{"type":"object","properties":{"search_query":{"$ref":"#/components/schemas/SearchPropertyQueryDto"},"alert_id":{"type":"string"},"search_name":{"type":"string"}},"required":["search_query","alert_id"]},"SaveSearchAdvertsPayloadDto":{"type":"object","properties":{"search_query":{"$ref":"#/components/schemas/SearchAdvertQueryDto"},"webhook_url":{"type":"string"},"search_name":{"type":"string"}},"required":["search_query"]},"ManySaveSearchAdvertsPayloadDto":{"type":"object","properties":{"search_query":{"$ref":"#/components/schemas/SearchAdvertQueryDto"},"alert_id":{"type":"string"},"search_name":{"type":"string"}},"required":["search_query","alert_id"]},"AnalyticsBoxplotValueDto":{"type":"object","properties":{"lower":{"type":"number"},"max":{"type":"number"},"min":{"type":"number"},"q1":{"type":"number"},"q2":{"type":"number"},"q3":{"type":"number"},"upper":{"type":"number"}}},"AnalyticsStandardDeviationBoundsDto":{"type":"object","properties":{"lower":{"type":"number"},"lowerPopulation":{"type":"number"},"lowerSampling":{"type":"number"},"upper":{"type":"number"},"upperPopulation":{"type":"number"},"upperSampling":{"type":"number"}}},"AnalyticsAdvancedSummaryValueDto":{"type":"object","properties":{"avg":{"type":"number"},"count":{"type":"number"},"max":{"type":"number"},"min":{"type":"number"},"stdDeviation":{"type":"number"},"stdDeviationBounds":{"$ref":"#/components/schemas/AnalyticsStandardDeviationBoundsDto"},"stdDeviationPopulation":{"type":"number"},"stdDeviationSampling":{"type":"number"},"sum":{"type":"number"},"sumOfSquares":{"type":"number"},"variance":{"type":"number"},"variancePopulation":{"type":"number"},"varianceSampling":{"type":"number"}}},"AnalyticsSummaryValueDto":{"type":"object","properties":{"avg":{"type":"number"},"count":{"type":"number"},"max":{"type":"number"},"min":{"type":"number"},"sum":{"type":"number"}}},"AnalyticsAnalysisDto":{"type":"object","properties":{"boxplotValue":{"$ref":"#/components/schemas/AnalyticsBoxplotValueDto"},"advancedKpiValue":{"$ref":"#/components/schemas/AnalyticsAdvancedSummaryValueDto"},"summaryValue":{"$ref":"#/components/schemas/AnalyticsSummaryValueDto"}}},"FilterPropertyLightDto":{"type":"object","properties":{"habitation":{"$ref":"#/components/schemas/FilterTypeHabitationDto"},"land":{"$ref":"#/components/schemas/FilterTypeLandDto"},"location":{"type":"array","items":{"$ref":"#/components/schemas/FilterLocationDto"}},"meta":{"$ref":"#/components/schemas/FilterMetaDto"},"parking":{"$ref":"#/components/schemas/FilterTypeParkingDto"},"price":{"$ref":"#/components/schemas/FilterPriceDto"},"process":{"type":"array","example":"PROCESS_UNKNOWN","items":{"$ref":"#/components/schemas/EnumPropertyProcessDto"}},"type":{"type":"array","example":"CLASS_UNKNWON","items":{"$ref":"#/components/schemas/EnumPropertyClassDto"}},"offer":{"type":"array","items":{"$ref":"#/components/schemas/FilterOfferDto"}}}},"SearchPropertyQueryLightDto":{"type":"object","properties":{"filterProperty":{"$ref":"#/components/schemas/FilterPropertyLightDto"}}},"AnalyticsAnalyzedTypeEnumDto":{"type":"string","enum":["PRICE_ANALYZED_TYPE","PRICE_PER_AREA_ANALYZED_TYPE"]},"AnalyticsGeneralAnalyticTypeEnumDto":{"type":"string","enum":["SUMMARY_ANALYSIS_TYPE","ADVANCED_ANALYSIS_TYPE","BOX_PLOT_ANALYSIS_TYPE","PERCENTILES_ANALYSIS_TYPE"]},"AnalyticsGeneralAnalyticsRequestDto":{"type":"object","properties":{"query":{"$ref":"#/components/schemas/SearchPropertyQueryLightDto"},"studiedData":{"example":"PRICE_ANALYZED_TYPE","$ref":"#/components/schemas/AnalyticsAnalyzedTypeEnumDto"},"type":{"example":"SUMMARY_ANALYSIS_TYPE","$ref":"#/components/schemas/AnalyticsGeneralAnalyticTypeEnumDto"}},"required":["query","studiedData","type"]},"EnumArtificialimmoPropertyDto":{"type":"string","enum":["HOUSE","FLAT"]},"ArtificialimmoMarketEstimationDataDto":{"type":"object","properties":{"bedroomsCount":{"type":"number"},"isRecent":{"type":"boolean"},"landSurfaceArea":{"type":"number"},"lat":{"type":"number"},"lon":{"type":"number"},"newProperty":{"type":"boolean"},"pool":{"type":"boolean"},"propertyType":{"example":"HOUSE","description":"Type of the property","$ref":"#/components/schemas/EnumArtificialimmoPropertyDto"},"roomsCount":{"type":"number"},"surfaceArea":{"type":"number"},"workToDo":{"type":"boolean"}},"required":["bedroomsCount","isRecent","landSurfaceArea","lat","lon","newProperty","pool","propertyType","roomsCount","surfaceArea","workToDo"]},"ArtificialimmoMarketEstimateRequestDto":{"type":"object","properties":{"property":{"description":"Properties to estimate","allOf":[{"$ref":"#/components/schemas/ArtificialimmoMarketEstimationDataDto"}]}},"required":["property"]},"EnumArtificialimmoConfidenceDto":{"type":"string","enum":["VERY_LOW","LOW","MEDIUM","HIGH"]},"ArtificialimmoEstimationResponseDto":{"properties":{"data":{"type":"object","properties":{"confidence":{"example":"VERY_LOW","description":"Confidence of the estimation","$ref":"#/components/schemas/EnumArtificialimmoConfidenceDto"},"value":{"type":"number"}},"required":["confidence","value"]}},"required":["data"],"type":"object"},"SampleWebhookAdvertsItemDto":{"type":"object","properties":{"adverts":{"type":"array","items":{"$ref":"#/components/schemas/AdvertDto"}},"alert_id":{"type":"string"}},"required":["adverts","alert_id"]},"SampleWebhookAdvertsResponseDto":{"properties":{"data":{"type":"object","properties":{"created":{"type":"array","items":{"$ref":"#/components/schemas/SampleWebhookAdvertsItemDto"}}},"required":["created"]}},"required":["data"],"type":"object"},"SampleWebhookPropertiesItemDto":{"type":"object","properties":{"properties":{"description":"List of property flxIds","example":["7364690d-2487-46d1-832d-c5ae1cf6e861","3fcf2348-756d-40e2-9bcd-3c4fd02f51d8"],"type":"array","items":{"type":"string"}},"alert_id":{"type":"string"}},"required":["properties","alert_id"]},"SampleWebhookPropertiesResponseDto":{"properties":{"data":{"type":"object","properties":{"created":{"type":"array","items":{"$ref":"#/components/schemas/SampleWebhookPropertiesItemDto"}}},"required":["created"]}},"required":["data"],"type":"object"}}},"x-tagGroups":[{"name":"General","tags":["System"]},{"name":"Properties","tags":["Properties","Properties Search","Properties Alerts"]},{"name":"Adverts","tags":["Adverts","Adverts Search","Adverts Alerts"]},{"name":"Samples","tags":["Sample Properties","Sample Adverts"]},{"name":"Analytics","tags":["Analytics"]},{"name":"Estimations","tags":["Estimations"]},{"name":"Models","tags":["PropertyModel","AdvertModel"]}]}
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/version": {
+      "get": {
+        "operationId": "GeneralController_getVersion",
+        "summary": "getVersion",
+        "description": "Get the app version",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return current version",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionRes"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/healthz": {
+      "get": {
+        "operationId": "GeneralController_healthz",
+        "summary": "healthz",
+        "description": "For metrics server health checking",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return OK"
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/portals": {
+      "get": {
+        "operationId": "GeneralController_portals",
+        "summary": "Get the list of real-estate platforms",
+        "description": "Non exhaustive list of real-estate ad platforms - New platform can be added on specific request\n",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/String"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/v2/protected/adverts/search": {
+      "post": {
+        "operationId": "SearchAdvertsController_postSearch",
+        "summary": "Search adverts",
+        "description": "Search adverts with filters and fulltexts search terms",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchAdvertPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchAdvertsResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Search"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/properties/search": {
+      "post": {
+        "operationId": "SearchPropertiesController_postSearch",
+        "summary": "Search properties",
+        "description": "Search properties with filters and fulltexts search terms",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPropertyPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchPropertiesResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Search"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/sample/properties": {
+      "get": {
+        "operationId": "SamplePropertiesController_GetSampleProperties",
+        "summary": "Get a sample of properties",
+        "description": "Get a sample of properties",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PropertyDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Sample Properties"
+        ]
+      }
+    },
+    "/v2/protected/properties/{flxId}": {
+      "get": {
+        "operationId": "PropertiesController_getProperty",
+        "summary": "Get properties byt their flx_id",
+        "description": "Get properties by their flx_id (flx_id is the id of the property in the database) and return its properties",
+        "parameters": [
+          {
+            "name": "flxId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/PropertyDto"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": {
+                      "message": "Not Found",
+                      "code": 10003
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Properties"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/properties/url": {
+      "get": {
+        "operationId": "PropertiesController_getPropertyByUrl",
+        "summary": "Retrieve a property by url",
+        "description": "Retrieve a property by one of it's advert URL",
+        "parameters": [
+          {
+            "name": "url",
+            "required": true,
+            "in": "query",
+            "description": "Url of an advert to get the associated property",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/PropertyDto"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Properties"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/properties/search/alerts": {
+      "put": {
+        "operationId": "SaveSearchPropertiesCrudController_postSaveSearch",
+        "summary": "Create a new alert for this Property search",
+        "description": "Create a new alert on a Property search. The alert will be saved in the database and will be triggered when a new property is found.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveSearchPropertiesPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/properties/search/alerts/{alertId}": {
+      "get": {
+        "operationId": "SaveSearchPropertiesCrudController_getSaveSearch",
+        "summary": "Get the search criteria of a Propertyalert",
+        "description": "Get the search criteria of a Property alert by its id (alertId)",
+        "parameters": [
+          {
+            "name": "alertId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveSearchPropertiesPayloadDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "SaveSearchPropertiesCrudController_updateSavedSearch",
+        "summary": "Update the search criteria of a Property alert",
+        "description": "Update the search criteria of a Property alert by its id (alertId) and return the new alertId",
+        "parameters": [
+          {
+            "name": "alertId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveSearchPropertiesPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "SaveSearchPropertiesCrudController_deleteSavedSearch",
+        "summary": "Deactivate a Property search alert",
+        "description": "Deactivate a Property search alert by its id (alertId)",
+        "parameters": [
+          {
+            "name": "alertId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/properties/search/alerts/all": {
+      "get": {
+        "operationId": "SaveSearchPropertiesCrudController_getAllSaveSearch",
+        "summary": "Get all your Property alerts",
+        "description": "Get the search criteria of all your Property alerts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ManySaveSearchPropertiesPayloadDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/properties/search/alerts/history/{flxId}": {
+      "get": {
+        "operationId": "SaveSearchPropertiesHistoryController_getProperty",
+        "summary": "Get history of match properties by its saved search flxId",
+        "description": "Get history of the properties matched to a saved search by its flxId. The history is composed of all the properties that have been match for this saved search.",
+        "parameters": [
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "description": "Skip the first N results",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "description": "Take the first N results",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "flxId",
+            "required": true,
+            "in": "path",
+            "description": "The flxId of the saved search",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PropertyDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Properties Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/adverts/{flxId}": {
+      "get": {
+        "operationId": "AdvertsController_getAdvert",
+        "summary": "Get adverts byt their flx_id",
+        "description": "Get adverts by their flx_id (flx_id is the id of the adverts in the database)",
+        "parameters": [
+          {
+            "name": "flxId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/AdvertDto"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": {
+                      "message": "Not Found",
+                      "code": 10003
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Adverts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/adverts/search/alerts": {
+      "put": {
+        "operationId": "SaveSearchAdvertsCrudController_postSaveSearch",
+        "summary": "Create a new Advert alert for this search",
+        "description": "Create a new alert on a Advert search. The alert will be saved in the database and will be triggered when a new Advert is found.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveSearchAdvertsPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/adverts/search/alerts/{alertId}": {
+      "get": {
+        "operationId": "SaveSearchAdvertsCrudController_getSaveSearch",
+        "summary": "Get the search criteria of an Advert alert",
+        "description": "Get the search criteria of an Advert alert by its id (alertId)",
+        "parameters": [
+          {
+            "name": "alertId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveSearchAdvertsPayloadDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "SaveSearchAdvertsCrudController_updateSavedSearch",
+        "summary": "Update the search criteria of an Advert alert",
+        "description": "Update the search criteria of an Advert alert by its id (alertId) and return the new alertId",
+        "parameters": [
+          {
+            "name": "alertId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveSearchAdvertsPayloadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "SaveSearchAdvertsCrudController_deleteSavedSearch",
+        "summary": "Deactivate a search Advert alert",
+        "description": "Deactivate a search Advert alert by its id (alertId)",
+        "parameters": [
+          {
+            "name": "alertId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSearchResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/adverts/search/alerts/all": {
+      "get": {
+        "operationId": "SaveSearchAdvertsCrudController_getAllSaveSearch",
+        "summary": "Get all your Advert alerts",
+        "description": "Get the search criteria of all your Advert alerts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ManySaveSearchAdvertsPayloadDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/sample/adverts": {
+      "get": {
+        "operationId": "SampleAdvertsController_GetSampleAdverts",
+        "summary": "Get a sample of ads",
+        "description": "Get a sample of ads",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AdvertDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Sample Adverts"
+        ]
+      }
+    },
+    "/v2/protected/adverts/search/alerts/history/{flxId}": {
+      "get": {
+        "operationId": "SaveSearchAdvertsHistoryController_getProperty",
+        "summary": "Get history of match adverts by its saved search flxId",
+        "description": "Get history of the adverts matched to a saved search by its flxId. The history is composed of all the adverts that have been match for this saved search.",
+        "parameters": [
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "description": "Skip the first N results",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "description": "Take the first N results",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "flxId",
+            "required": true,
+            "in": "path",
+            "description": "The flxId of the saved search",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/OkResponseAnyDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AdvertDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Adverts Alerts"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/experimental/analytics": {
+      "post": {
+        "operationId": "AnalyticsController_getAnalytics",
+        "summary": "Get analytics data for a given context (property, location, ...) ",
+        "description": "Get analytics data for a given context",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyticsGeneralAnalyticsRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/AnalyticsAnalysisDto"
+                    }
+                  }
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Analytics"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/protected/experimental/estimate": {
+      "post": {
+        "operationId": "EstimationsController_estimate",
+        "summary": "Estimate the price of a property",
+        "description": "Estimate the price of a property based on market data",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArtificialimmoMarketEstimateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtificialimmoEstimationResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Estimations"
+        ],
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/v2/sample/webhook/adverts": {
+      "get": {
+        "operationId": "SampleWebhookAdvertsController_GetSampleWebhookAdverts",
+        "summary": "Sample advert webhook body",
+        "description": "Sample of an alert webhook body for Adverts",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SampleWebhookAdvertsResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Sample Adverts"
+        ]
+      }
+    },
+    "/v2/sample/webhook/properties": {
+      "get": {
+        "operationId": "SampleWebhookPropertiesController_GetSampleWebhookProperties",
+        "summary": "Sample Properties webhook body",
+        "description": "Sample of an alert webhook body for Properties",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SampleWebhookPropertiesResponseDto"
+                }
+              }
+            }
+          },
+        },
+        "tags": [
+          "Sample Properties"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Real-estate data API - Fluximmo V2",
+    "description": "## Fluximmo\n##### Real-time real estate data: Power workflows, business applications and decision-making.\n\nReal estate expert since 2017, Fluximmo aggregates, exploits, enriches & analyzes the \n\nreal-estate market in real time to offer data flows, APIs and innovative services to real estate professionals.\n\n## Authentification\nYou'll need to be authenticated with an active subscription to access our REST endpoints.\n\nTo get an API-KEY please contact us at contact@fluximmo.com or book a call with our team: https://calendly.com/fluximmo/meet-fluximmo\n##### How to use your API KEY\nSimply add to your HTTP request your API KEY in the headers: `{'x-api-key':'randomApiKey'}`\n\n## Properties and Adverts\nReal-estate market can be conceptualized in different ways. We offer two different conceptualization depending on your needs: Properties & Adverts.\n#### Properties (BAAS)\nA property is a real-estate habitation/land/commercial/building to which is attached adverts.\n\nWe gather all the adverts offering (selling or renting) this real-estate asset and consolidate all the information into one Property.\n\nA Property is by definition `de-duplicated` and can gather 1 to x adverts: these adverts are either duplicates from different portals or with mandates from different agencies or republication of the same advertising with a price update or not.\n\nThe concept of property is in constant mutation until the real-estate asset is sold: We'll keep merging new adverts within the Property concept and update the price if needed.\n\nBy it's nature in constant mutation, we do not offer the possibility to receive these Properties on webhooks. You'll need to use our APIs as a Backend As A Service (BaaS).\n\n#### Adverts (BAAS and WEBHOOK)\nAdverts are advertising of a real-estate property. Adverts can come from many sources: Agencies websites, Aggregation real-estate portals, Social-Networks, NewsPaper etc...\n\nAfter gathering all these adverts our proprietary AI algorithms will de-duplicate these adverts and associate them to a Property\n\nAn advert have a unique URL. Meaning that the same advertising re-published twice (with our without any change, on the same website or not, by the same agency or not) is considered as 2 ads.\n\nYou can choose either to retrieve all the Adverts or only the non duplicated ones. Adverts can be retrieved either by API (Search or Alerts) or Webhook\n## Webhooks\nWe offer the possibility to receive our real-estate Adverts data in real-time using webhooks. As soon as we gather the data, you'll receive it few moments later.\n\nUsing ALERTS, you can receive new adverts matching your criteria on a webhook.\n\n##### Webhook differences between Adverts and Properties\nAs Properties are by nature in perpetual evolutions (new duplicated ads will be merged, new data to be consolidated etc..), we do not offer the possibility to receive through Webhooks the full body of the properties. Properties webhook will only send you the list of the properties FlxIds matching your search.\n\nYou'll find below the schema of the data you would receive on your webhook (`/v2/sample/webhook/properties`, `/v2/sample/webhook/adverts`)\n##### What is a webhook\nA webhook can be thought of as a type of API that is driven by events rather than requests\n\n.Instead of one application making a request to another to receive a response, a webhook is a service that allows one program to send data to another as soon as a particular event takes place.\n\nWebhooks are sometimes referred to as “reverse APIs,” because communication is initiated by the application sending the data rather than the one receiving it.\n\nWith web services becoming increasingly interconnected, webhooks are seeing more action as a lightweight solution for enabling real-time notifications and data updates without the need to develop a full-scale API.\n##### When to use a webhook instead of the REST API\nYou're supposed to receive a high volume of data (frequently or not), you're looking for real-time data, you just have to relax and wait (no cron, no call on our API etc..)\n##### Webhook implementation examples\nA webhook is simply a POST endpoint we can request\n* Python: https://gist.github.com/aloysius-tim/293772256526efa20d5c625c6ace036a\n* Node: https://gist.github.com/aloysius-tim/ea1d9feb2c527b5b09ffc356b662d14b\n\n",
+    "version": "2.0.0",
+    "contact": {},
+    "x-logo": {
+      "url": "https://www.fluximmo.com/assets/images/logo_text.png",
+      "backgroundColor": "#F31051",
+      "altText": "Fluximmo logo"
+    }
+  },
+  "tags": [
+    {
+      "name": "PropertyModel",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/PropertyDto\" />"
+    },
+    {
+      "name": "AdvertModel",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/AdvertDto\" />"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.fluximmo.io"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "x-api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    },
+    "schemas": {
+      "VersionRes": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "readOnly": true,
+                "example": "v1.0.0"
+              }
+            },
+            "required": [
+              "version"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "OkResponseAnyDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "data"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "String": {
+        "type": "object",
+        "properties": {}
+      },
+      "EnumSearchRequestOrderByDto": {
+        "type": "string",
+        "enum": [
+          "ASC",
+          "DESC"
+        ]
+      },
+      "IntRangeDto": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "type": "number",
+            "description": "The maximum value of the range"
+          },
+          "min": {
+            "type": "number",
+            "description": "The minimum value of the range"
+          }
+        }
+      },
+      "FilterAdvertPriceDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The value of the price in €",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "valuePerArea": {
+            "description": "The value of the price per m² in €",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          }
+        }
+      },
+      "CharacteristicsDto": {
+        "type": "object",
+        "properties": {
+          "hasAlarm": {
+            "type": "boolean"
+          },
+          "hasBalcony": {
+            "type": "boolean"
+          },
+          "hasCellar": {
+            "type": "boolean"
+          },
+          "hasConcierge": {
+            "type": "boolean"
+          },
+          "hasDigicode": {
+            "type": "boolean"
+          },
+          "hasFireplace": {
+            "type": "boolean"
+          },
+          "hasGarage": {
+            "type": "boolean"
+          },
+          "hasGarden": {
+            "type": "boolean"
+          },
+          "hasGrenier": {
+            "type": "boolean"
+          },
+          "hasInterphone": {
+            "type": "boolean"
+          },
+          "hasJacuzzi": {
+            "type": "boolean"
+          },
+          "hasLand": {
+            "type": "boolean"
+          },
+          "hasLift": {
+            "type": "boolean"
+          },
+          "hasMezzanine": {
+            "type": "boolean"
+          },
+          "hasParking": {
+            "type": "boolean"
+          },
+          "hasPool": {
+            "type": "boolean"
+          },
+          "hasTerrace": {
+            "type": "boolean"
+          },
+          "hasVisAVis": {
+            "type": "boolean"
+          },
+          "isPeaceful": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EnumGreenhouseClassificationDto": {
+        "type": "string",
+        "enum": [
+          "GREENHOUSE_CLASSIFICATION_UNKNOWN",
+          "GREENHOUSE_CLASSIFICATION_G",
+          "GREENHOUSE_CLASSIFICATION_F",
+          "GREENHOUSE_CLASSIFICATION_E",
+          "GREENHOUSE_CLASSIFICATION_D",
+          "GREENHOUSE_CLASSIFICATION_C",
+          "GREENHOUSE_CLASSIFICATION_B",
+          "GREENHOUSE_CLASSIFICATION_A",
+          "GREENHOUSE_CLASSIFICATION_NC"
+        ]
+      },
+      "EnumEnergyClassificationDto": {
+        "type": "string",
+        "enum": [
+          "ENERGY_CLASSIFICATION_UNKNOWN",
+          "ENERGY_CLASSIFICATION_G",
+          "ENERGY_CLASSIFICATION_F",
+          "ENERGY_CLASSIFICATION_E",
+          "ENERGY_CLASSIFICATION_D",
+          "ENERGY_CLASSIFICATION_C",
+          "ENERGY_CLASSIFICATION_B",
+          "ENERGY_CLASSIFICATION_A",
+          "ENERGY_CLASSIFICATION_NC"
+        ]
+      },
+      "FilterClimateDto": {
+        "type": "object",
+        "properties": {
+          "epcClimate": {
+            "type": "array",
+            "example": "GREENHOUSE_CLASSIFICATION_UNKNOWN",
+            "description": "The classification value of the greenhouse gas emission classification - GES",
+            "items": {
+              "$ref": "#/components/schemas/EnumGreenhouseClassificationDto"
+            }
+          },
+          "epcClimateScore": {
+            "description": "The value of the greenhouse gas emission classification - GES in kgCO2/m²/year",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "epcEnergy": {
+            "type": "array",
+            "example": "ENERGY_CLASSIFICATION_UNKNOWN",
+            "description": "The classification value of the energy classification - DPE",
+            "items": {
+              "$ref": "#/components/schemas/EnumEnergyClassificationDto"
+            }
+          },
+          "epcEnergyScore": {
+            "description": "The value of the energy classification - DPE in kWhEP/m²/year",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          }
+        }
+      },
+      "EnumConstructionMaterialDto": {
+        "type": "string",
+        "enum": [
+          "MATERIAL_UNKNOWN",
+          "MATERIAL_WOODEN",
+          "MATERIAL_STEEL",
+          "MATERIAL_STONE",
+          "MATERIAL_PVC",
+          "MATERIAL_CONCRETE",
+          "MATERIAL_ALUMINIUM",
+          "MATERIAL_HALF_TIMBERED",
+          "MATERIAL_MARBLE",
+          "MATERIAL_BRICK",
+          "MATERIAL_CINDER_BLOCK",
+          "MATERIAL_PREFABRICATED",
+          "MATERIAL_ADOBE",
+          "MATERIAL_COATING"
+        ]
+      },
+      "EnumExposureDto": {
+        "type": "string",
+        "enum": [
+          "EXPOSURE_UNKNOWN",
+          "EXPOSURE_NORTH",
+          "EXPOSURE_NORTH_EAST",
+          "EXPOSURE_EAST",
+          "EXPOSURE_SOUTH_EAST",
+          "EXPOSURE_SOUTH",
+          "EXPOSURE_SOUTH_WEST",
+          "EXPOSURE_WEST",
+          "EXPOSURE_NORTH_WEST"
+        ]
+      },
+      "EnumFurnitureDto": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN_FURNITURE",
+          "UNFURNISHED",
+          "PARTIALLY_FURNISHED",
+          "FULLY_FURNISHED"
+        ]
+      },
+      "EnumViewTypeDto": {
+        "type": "string",
+        "enum": [
+          "VIEW_TYPE_UNKNOWN",
+          "VIEW_TYPE_GLIMPSE",
+          "VIEW_TYPE_PANORAMIC",
+          "VIEW_TYPE_CLEAR",
+          "VIEW_TYPE_EXCEPTIONAL",
+          "VIEW_TYPE_DOMINANT"
+        ]
+      },
+      "EnumGlazingTypeDto": {
+        "type": "string",
+        "enum": [
+          "GLAZING_TYPE_UNKNOWN",
+          "GLAZING_TYPE_SIMPLE",
+          "GLAZING_TYPE_DOUBLE",
+          "GLAZING_TYPE_TRIPLE"
+        ]
+      },
+      "EnumViewOnDto": {
+        "type": "string",
+        "enum": [
+          "VIEW_ON_UNKNOWN",
+          "VIEW_ON_SEA",
+          "VIEW_ON_HILLS",
+          "VIEW_ON_RIVERS",
+          "VIEW_ON_CITY",
+          "VIEW_ON_PARK",
+          "VIEW_ON_VERDURE",
+          "VIEW_ON_STREET",
+          "VIEW_ON_COURTYARD",
+          "VIEW_ON_COUNTRYSIDE",
+          "VIEW_ON_MOUNTAIN",
+          "VIEW_ON_GARDEN_TERRACE",
+          "VIEW_ON_LAKE",
+          "VIEW_ON_SKI_SLOPES",
+          "VIEW_ON_PORT",
+          "VIEW_ON_POI",
+          "VIEW_ON_SKY",
+          "VIEW_ON_WATER",
+          "VIEW_ON_VINEYARD",
+          "VIEW_ON_ROOF"
+        ]
+      },
+      "FilterFeaturesDto": {
+        "type": "object",
+        "properties": {
+          "claddingMaterials": {
+            "type": "array",
+            "example": "MATERIAL_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumConstructionMaterialDto"
+            }
+          },
+          "exposure": {
+            "type": "array",
+            "example": "EXPOSURE_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumExposureDto"
+            }
+          },
+          "furniture": {
+            "type": "array",
+            "example": "UNKNOWN_FURNITURE",
+            "items": {
+              "$ref": "#/components/schemas/EnumFurnitureDto"
+            }
+          },
+          "propertyFloor": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "propertyTotalFloor": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "viewType": {
+            "type": "array",
+            "example": "VIEW_TYPE_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumViewTypeDto"
+            }
+          },
+          "constructionMaterials": {
+            "type": "array",
+            "example": "MATERIAL_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumConstructionMaterialDto"
+            }
+          },
+          "glazingTypes": {
+            "type": "array",
+            "example": "GLAZING_TYPE_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumGlazingTypeDto"
+            }
+          },
+          "hasThroughExposure": {
+            "type": "boolean"
+          },
+          "viewOns": {
+            "type": "array",
+            "example": "VIEW_ON_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumViewOnDto"
+            }
+          },
+          "viewTypes": {
+            "type": "array",
+            "example": "VIEW_TYPE_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumViewTypeDto"
+            }
+          }
+        }
+      },
+      "EnumHeatTypeDto": {
+        "type": "string",
+        "enum": [
+          "HEAT_TYPE_UNKNOWN",
+          "HEAT_TYPE_INDIVIDUAL",
+          "HEAT_TYPE_SHARE",
+          "HEAT_TYPE_MIX",
+          "HEAT_TYPE_CITY",
+          "HEAT_TYPE_CISTERN"
+        ]
+      },
+      "EnumHeatTypeDetailDto": {
+        "type": "string",
+        "enum": [
+          "HEAT_DETAIL_UNKNWON",
+          "HEAT_DETAIL_FLOOR",
+          "HEAT_DETAIL_CEILING",
+          "HEAT_DETAIL_FIREPLACE",
+          "HEAT_DETAIL_INSERT",
+          "HEAT_DETAIL_AIR_CON",
+          "HEAT_DETAIL_REVERSIBLE_AIR_CON",
+          "HEAT_DETAIL_RADIANTS_TUBES",
+          "HEAT_DETAIL_RADIATOR",
+          "HEAT_DETAIL_SHEAHS",
+          "HEAT_DETAIL_CONVECTOR"
+        ]
+      },
+      "EnumHeatingDto": {
+        "type": "string",
+        "enum": [
+          "HEATING_UNKNOWN",
+          "HEATING_FUEL_OIL",
+          "HEATING_ELECTRICAL",
+          "HEATING_GAS",
+          "HEATING_BIOMASS",
+          "HEATING_SOLAR",
+          "HEATING_GEOTHERMAL",
+          "HEATING_WOOD",
+          "HEATING_HEAT_PUMP",
+          "HEATING_PELLET",
+          "HEATING_CANADIAN_WELL",
+          "HEATING_COAL"
+        ]
+      },
+      "EnumPropertyInteriorConditionDto": {
+        "type": "string",
+        "enum": [
+          "INTERIOR_CONDITION_UNKNWON",
+          "INTERIOR_CONDITION_EXCELLENT",
+          "INTERIOR_CONDITION_TO_REFRESH",
+          "INTERIOR_CONDITION_SMALL_WORKS_TO_BE_PLANNED",
+          "INTERIOR_CONDITION_MAJOR_WORKS_TO_BE_PALLNED",
+          "INTERIOR_CONDITION_BRAND_NEW",
+          "INTERIOR_CONDITION_GOOD_CONDITION",
+          "INTERIOR_CONDITION_TO_BE_RENOVATED"
+        ]
+      },
+      "EnumPropertyGeneralConditionDto": {
+        "type": "string",
+        "enum": [
+          "GENERAL_CONDITION_UNKNOWN",
+          "GENERAL_CONDITION_TO_BE_RENOVATED",
+          "GENERAL_CONDITION_BRAND_NEW",
+          "GENERAL_CONDITION_RENOVATED",
+          "GENERAL_CONDITION_TO_BE_REFRESHED",
+          "GENERAL_CONDITION_GOOD",
+          "GENERAL_CONDITION_EXCELLENT",
+          "GENERAL_CONDITION_DECREPIT",
+          "GENERAL_CONDITION_TO_BE_BUILT"
+        ]
+      },
+      "PropertyConditionDto": {
+        "type": "object",
+        "properties": {
+          "constructionYear": {
+            "type": "number"
+          },
+          "interiorCondition": {
+            "example": "INTERIOR_CONDITION_UNKNWON",
+            "$ref": "#/components/schemas/EnumPropertyInteriorConditionDto"
+          },
+          "renovationYear": {
+            "type": "number"
+          },
+          "generalConditions": {
+            "type": "array",
+            "example": "GENERAL_CONDITION_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyGeneralConditionDto"
+            }
+          }
+        }
+      },
+      "FilterSurfaceDto": {
+        "type": "object",
+        "properties": {
+          "balconies": {
+            "description": "The surface of the balconies in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "floorSpace": {
+            "description": "The surface of the total floors in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "gardens": {
+            "description": "The surface of the gardens in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "groundFloor": {
+            "description": "The surface of the ground floor in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "kitchen": {
+            "description": "The surface of the kitchen in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "livingSpace": {
+            "description": "The surface of the living space in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "livingroom": {
+            "description": "The surface of the living room in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "terraces": {
+            "description": "The surface of the terraces in m² - we rarely have this information",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          },
+          "total": {
+            "description": "The total habitable surface of the property in m²",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IntRangeDto"
+              }
+            ]
+          }
+        }
+      },
+      "EnumPropertyTypeHabitationDto": {
+        "type": "string",
+        "enum": [
+          "PROPERTY_TYPE_UNKNOWN",
+          "PROPERTY_TYPE_STUDIO",
+          "PROPERTY_TYPE_T1",
+          "PROPERTY_TYPE_T1_T2",
+          "PROPERTY_TYPE_T2",
+          "PROPERTY_TYPE_T2_T3",
+          "PROPERTY_TYPE_T3",
+          "PROPERTY_TYPE_T3_4",
+          "PROPERTY_TYPE_T4",
+          "PROPERTY_TYPE_T4_5",
+          "PROPERTY_TYPE_T5_MORE",
+          "PROPERTY_TYPE_LOFT",
+          "PROPERTY_TYPE_DUPLEX",
+          "PROPERTY_TYPE_OTHER_APARTMENT_TYPE",
+          "PROPERTY_TYPE_INDIVIDUAL",
+          "PROPERTY_TYPE_ONE_SIDE_TERRACED",
+          "PROPERTY_TYPE_TWO_SIDE_TERRACED",
+          "PROPERTY_TYPE_SINGLE_STOREY",
+          "PROPERTY_TYPE_TRADITIONAL",
+          "PROPERTY_TYPE_CONTEMPORARY",
+          "PROPERTY_TYPE_BOURGEOIS",
+          "PROPERTY_TYPE_VILLA",
+          "PROPERTY_TYPE_MANOR",
+          "PROPERTY_TYPE_CASTLE",
+          "PROPERTY_TYPE_FARM",
+          "PROPERTY_TYPE_MAS",
+          "PROPERTY_TYPE_BASTIDE",
+          "PROPERTY_TYPE_CHALET",
+          "PROPERTY_TYPE_ANCIENT",
+          "PROPERTY_TYPE_HERITAGE_LISTED",
+          "PROPERTY_TYPE_BUNGALOW"
+        ]
+      },
+      "FilterTypeHabitationDto": {
+        "type": "object",
+        "properties": {
+          "bathroomCount": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "bedroomCount": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "characteristics": {
+            "$ref": "#/components/schemas/CharacteristicsDto"
+          },
+          "climate": {
+            "$ref": "#/components/schemas/FilterClimateDto"
+          },
+          "features": {
+            "$ref": "#/components/schemas/FilterFeaturesDto"
+          },
+          "heatTypes": {
+            "type": "array",
+            "example": "HEAT_TYPE_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumHeatTypeDto"
+            }
+          },
+          "heatTypeDetails": {
+            "type": "array",
+            "example": "HEAT_DETAIL_UNKNWON",
+            "items": {
+              "$ref": "#/components/schemas/EnumHeatTypeDetailDto"
+            }
+          },
+          "heatings": {
+            "type": "array",
+            "example": "HEATING_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumHeatingDto"
+            }
+          },
+          "propertyCondition": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertyConditionDto"
+            }
+          },
+          "roomCount": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "surface": {
+            "$ref": "#/components/schemas/FilterSurfaceDto"
+          },
+          "type": {
+            "example": "PROPERTY_TYPE_UNKNOWN",
+            "$ref": "#/components/schemas/EnumPropertyTypeHabitationDto"
+          },
+          "wcCount": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          }
+        }
+      },
+      "EnumLandTypeDto": {
+        "type": "string",
+        "enum": [
+          "LAND_UNKNWON",
+          "LAND_BUILDING_PLOT",
+          "LAND_AGRICULTURAL",
+          "LAND_VINEYARD",
+          "LAND_INDUSTRIAL",
+          "LAND_POND",
+          "LAND_FOREST"
+        ]
+      },
+      "FilterTypeLandDto": {
+        "type": "object",
+        "properties": {
+          "canConstruct": {
+            "type": "boolean"
+          },
+          "isServiced": {
+            "type": "boolean"
+          },
+          "surface": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "surfaceConstructable": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "type": {
+            "type": "array",
+            "example": "LAND_UNKNWON",
+            "items": {
+              "$ref": "#/components/schemas/EnumLandTypeDto"
+            }
+          },
+          "haveBuildingPermit": {
+            "type": "boolean"
+          },
+          "haveElectricity": {
+            "type": "boolean"
+          },
+          "haveTelecom": {
+            "type": "boolean"
+          },
+          "haveWater": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FilterDateRangeDto": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date filter - Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "min": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date filter - Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          }
+        }
+      },
+      "FilterOfferRentingContractDto": {
+        "type": "object",
+        "properties": {
+          "isColocation": {
+            "type": "boolean"
+          },
+          "isLongTerm": {
+            "type": "boolean"
+          },
+          "isShortTerm": {
+            "type": "boolean"
+          },
+          "isSubLease": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EnumPropertyOfferTypeDto": {
+        "type": "string",
+        "enum": [
+          "OFFER_UNKNOWN",
+          "OFFER_BUY",
+          "OFFER_RENT",
+          "OFFER_BUSINESS_TAKE_OVER",
+          "OFFER_LEASE_BACK",
+          "OFFER_LIFE_ANNUITY_SALE",
+          "OFFER_HOLIDAYS"
+        ]
+      },
+      "FilterOfferDto": {
+        "type": "object",
+        "properties": {
+          "isCurrentlyOccupied": {
+            "type": "boolean"
+          },
+          "renting": {
+            "$ref": "#/components/schemas/FilterOfferRentingContractDto"
+          },
+          "type": {
+            "example": "OFFER_UNKNOWN",
+            "$ref": "#/components/schemas/EnumPropertyOfferTypeDto"
+          }
+        }
+      },
+      "EnumParkingTypeDto": {
+        "type": "string",
+        "enum": [
+          "PARKING_UNKNOWN",
+          "PARKING_GARAGE",
+          "PARKING_PARKING"
+        ]
+      },
+      "FilterTypeParkingDto": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "numberOfCars": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "surface": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "type": {
+            "type": "array",
+            "example": "PARKING_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumParkingTypeDto"
+            }
+          }
+        }
+      },
+      "EnumPropertyProcessDto": {
+        "type": "string",
+        "enum": [
+          "PROCESS_UNKNOWN",
+          "PROCESS_AVAILABLE_ON_MARKET",
+          "PROCESS_UNDER_COMPROMISE",
+          "PROCESS_RENTED_SOLD",
+          "PROCESS_REMOVED",
+          "PROCESS_RESERVED",
+          "PROCESS_ARCHIVED"
+        ]
+      },
+      "EnumPricingScopeDto": {
+        "type": "string",
+        "enum": [
+          "PRICING_ONE_OFF",
+          "PRICING_MENSUAL"
+        ]
+      },
+      "EnumPropertyClassDto": {
+        "type": "string",
+        "enum": [
+          "CLASS_UNKNWON",
+          "CLASS_HOUSE",
+          "CLASS_FLAT",
+          "CLASS_PROGRAM",
+          "CLASS_SHOP",
+          "CLASS_PREMISES",
+          "CLASS_OFFICE",
+          "CLASS_LAND",
+          "CLASS_BUILDING",
+          "CLASS_PARKING"
+        ]
+      },
+      "FilterDoubleRangeDto": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          }
+        }
+      },
+      "LatLngDto": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "description": "Latitude"
+          },
+          "lon": {
+            "type": "number",
+            "description": "Longitude"
+          }
+        }
+      },
+      "FilterLatLngGeoBoundingBoxDto": {
+        "type": "object",
+        "properties": {
+          "bottomRight": {
+            "$ref": "#/components/schemas/LatLngDto"
+          },
+          "topLeft": {
+            "$ref": "#/components/schemas/LatLngDto"
+          }
+        }
+      },
+      "FilterLatLngGeoDistanceDto": {
+        "type": "object",
+        "properties": {
+          "distanceKm": {
+            "type": "number"
+          },
+          "pin": {
+            "$ref": "#/components/schemas/LatLngDto"
+          }
+        }
+      },
+      "FilterLatLngDto": {
+        "type": "object",
+        "properties": {
+          "geoBoundingBox": {
+            "$ref": "#/components/schemas/FilterLatLngGeoBoundingBoxDto"
+          },
+          "geoDistance": {
+            "$ref": "#/components/schemas/FilterLatLngGeoDistanceDto"
+          }
+        }
+      },
+      "FilterCompleteLatLngDto": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "Filter by location geo coordinates",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterLatLngDto"
+              }
+            ]
+          }
+        }
+      },
+      "FilterLocationDto": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "cityCoordinate": {
+            "$ref": "#/components/schemas/FilterCompleteLatLngDto"
+          },
+          "department": {
+            "type": "string"
+          },
+          "inseeCode": {
+            "type": "string"
+          },
+          "irisCode": {
+            "type": "string"
+          },
+          "locationCoordinate": {
+            "$ref": "#/components/schemas/FilterCompleteLatLngDto"
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterSourceDto": {
+        "type": "object",
+        "properties": {
+          "flxId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "website": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "EnumCurrencyDto": {
+        "type": "string",
+        "enum": [
+          "CURRENCY_EUR",
+          "CURRENCY_USD"
+        ]
+      },
+      "EnumSellerTypeDto": {
+        "type": "string",
+        "enum": [
+          "SELLER_TYPE_UNKNOWN",
+          "SELLER_TYPE_AGENCY",
+          "SELLER_TYPE_NETWORK"
+        ]
+      },
+      "LightSellerDto": {
+        "type": "object",
+        "properties": {
+          "flxId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "siren": {
+            "type": "string"
+          },
+          "type": {
+            "example": "SELLER_TYPE_UNKNOWN",
+            "$ref": "#/components/schemas/EnumSellerTypeDto"
+          }
+        }
+      },
+      "FilterAdvertDto": {
+        "type": "object",
+        "properties": {
+          "currentPrice": {
+            "$ref": "#/components/schemas/FilterAdvertPriceDto"
+          },
+          "habitation": {
+            "$ref": "#/components/schemas/FilterTypeHabitationDto"
+          },
+          "isAuction": {
+            "type": "boolean"
+          },
+          "isUrgent": {
+            "type": "boolean"
+          },
+          "land": {
+            "$ref": "#/components/schemas/FilterTypeLandDto"
+          },
+          "lastModifiedAt": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterDateRangeDto"
+            }
+          },
+          "offer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterOfferDto"
+            }
+          },
+          "parking": {
+            "$ref": "#/components/schemas/FilterTypeParkingDto"
+          },
+          "process": {
+            "type": "array",
+            "example": "PROCESS_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyProcessDto"
+            }
+          },
+          "scope": {
+            "type": "array",
+            "example": "PRICING_ONE_OFF",
+            "items": {
+              "$ref": "#/components/schemas/EnumPricingScopeDto"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": "array",
+            "example": "CLASS_UNKNWON",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyClassDto"
+            }
+          },
+          "warrantyDeposit": {
+            "$ref": "#/components/schemas/FilterDoubleRangeDto"
+          },
+          "firstSeenAt": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterDateRangeDto"
+            }
+          },
+          "location": {
+            "$ref": "#/components/schemas/FilterLocationDto"
+          },
+          "source": {
+            "$ref": "#/components/schemas/FilterSourceDto"
+          },
+          "currency": {
+            "type": "array",
+            "example": "EUR",
+            "items": {
+              "$ref": "#/components/schemas/EnumCurrencyDto"
+            }
+          },
+          "mainPropertyAdFlxId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "propertyFlxId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPro": {
+            "type": "boolean"
+          },
+          "seller": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LightSellerDto"
+            }
+          }
+        }
+      },
+      "SearchAdvertQueryDto": {
+        "type": "object",
+        "properties": {
+          "filterAd": {
+            "$ref": "#/components/schemas/FilterAdvertDto"
+          },
+          "fullTexts": {
+            "description": "Search terms for full text search. We'll search in title, description, and keywords for terms similar to these (typically, we'll use a fuzzy search).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "keywords": {
+            "description": "Search terms for keyword search. We'll search in title, description, and keywords for exact matches to these terms (typically, we'll use a term search).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "filterAd",
+          "fullTexts",
+          "keywords"
+        ]
+      },
+      "EnumSearchRequestSortByDto": {
+        "type": "string",
+        "enum": [
+          "RELEVANCE",
+          "PRICE",
+          "FIRST_SEEN_AT",
+          "LAST_UPDATED_AT",
+          "LAST_SEEN_AT"
+        ]
+      },
+      "SearchAdvertPayloadDto": {
+        "type": "object",
+        "properties": {
+          "orderBy": {
+            "example": "ASC",
+            "$ref": "#/components/schemas/EnumSearchRequestOrderByDto"
+          },
+          "search": {
+            "$ref": "#/components/schemas/SearchAdvertQueryDto"
+          },
+          "searchAfterHash": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "sortBy": {
+            "example": "RELEVANCE",
+            "$ref": "#/components/schemas/EnumSearchRequestSortByDto"
+          }
+        },
+        "required": [
+          "orderBy",
+          "search",
+          "size",
+          "sortBy"
+        ]
+      },
+      "AdvertPriceDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "The value of the price in €"
+          },
+          "valuePerArea": {
+            "type": "number",
+            "description": "The value of the price per area in €"
+          }
+        }
+      },
+      "ClimateDto": {
+        "type": "object",
+        "properties": {
+          "epcClimate": {
+            "example": "GREENHOUSE_CLASSIFICATION_UNKNOWN",
+            "description": "The classification value of the greenhouse gas emission classification - GES",
+            "$ref": "#/components/schemas/EnumGreenhouseClassificationDto"
+          },
+          "epcClimateScore": {
+            "type": "number",
+            "description": "The value of the greenhouse gas emission classification - GES in kgCO2/m²/year"
+          },
+          "epcEnergy": {
+            "example": "ENERGY_CLASSIFICATION_UNKNOWN",
+            "description": "The classification value of the energy classification - DPE",
+            "$ref": "#/components/schemas/EnumEnergyClassificationDto"
+          },
+          "epcEnergyScore": {
+            "type": "number",
+            "description": "The value of the energy classification - DPE in kWhEP/m²/year"
+          }
+        }
+      },
+      "FeaturesDto": {
+        "type": "object",
+        "properties": {
+          "exposure": {
+            "example": "EXPOSURE_UNKNOWN",
+            "$ref": "#/components/schemas/EnumExposureDto"
+          },
+          "furniture": {
+            "example": "UNKNOWN_FURNITURE",
+            "$ref": "#/components/schemas/EnumFurnitureDto"
+          },
+          "propertyFloor": {
+            "type": "number"
+          },
+          "propertyTotalFloor": {
+            "type": "number"
+          },
+          "viewTypes": {
+            "type": "array",
+            "example": "VIEW_TYPE_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumViewTypeDto"
+            }
+          },
+          "constructionMaterials": {
+            "type": "array",
+            "example": "MATERIAL_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumConstructionMaterialDto"
+            }
+          },
+          "hasThroughExposure": {
+            "type": "boolean"
+          },
+          "viewOns": {
+            "type": "array",
+            "example": "VIEW_ON_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumViewOnDto"
+            }
+          }
+        }
+      },
+      "SurfaceDto": {
+        "type": "object",
+        "properties": {
+          "balconies": {
+            "type": "number",
+            "description": "The surface of the balconies in m² - we rarely have this information"
+          },
+          "floorSpace": {
+            "type": "number",
+            "description": "The surface of the total floors in m² - we rarely have this information"
+          },
+          "gardens": {
+            "type": "number",
+            "description": "The surface of the gardens in m² - we rarely have this information"
+          },
+          "groundFloor": {
+            "type": "number",
+            "description": "The surface of the ground floor in m² - we rarely have this information"
+          },
+          "kitchen": {
+            "type": "number",
+            "description": "The surface of the kitchen in m² - we rarely have this information"
+          },
+          "livingSpace": {
+            "type": "number",
+            "description": "The surface of the living space in m² - we rarely have this information"
+          },
+          "livingRoom": {
+            "type": "number",
+            "description": "The surface of the living room in m² - we rarely have this information"
+          },
+          "terraces": {
+            "type": "number",
+            "description": "The surface of the terraces in m² - we rarely have this information"
+          },
+          "total": {
+            "type": "number",
+            "description": "The total habitable surface of the property in m²"
+          }
+        }
+      },
+      "TypeHabitationDto": {
+        "type": "object",
+        "properties": {
+          "bathroomCount": {
+            "type": "number"
+          },
+          "bedroomCount": {
+            "type": "number"
+          },
+          "characteristics": {
+            "$ref": "#/components/schemas/CharacteristicsDto"
+          },
+          "climate": {
+            "description": "The energetic classes of the property (DPE/GES)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClimateDto"
+              }
+            ]
+          },
+          "features": {
+            "$ref": "#/components/schemas/FeaturesDto"
+          },
+          "heatTypes": {
+            "type": "array",
+            "example": [
+              "HEAT_TYPE_UNKNOWN"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EnumHeatTypeDto"
+            }
+          },
+          "heatTypeDetails": {
+            "type": "array",
+            "example": [
+              "HEAT_DETAIL_UNKNWON"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EnumHeatTypeDetailDto"
+            }
+          },
+          "heatings": {
+            "type": "array",
+            "example": [
+              "HEATING_UNKNOWN"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EnumHeatingDto"
+            }
+          },
+          "propertyCondition": {
+            "$ref": "#/components/schemas/PropertyConditionDto"
+          },
+          "roomCount": {
+            "type": "number"
+          },
+          "surface": {
+            "$ref": "#/components/schemas/SurfaceDto"
+          },
+          "type": {
+            "example": [
+              "PROPERTY_TYPE_UNKNOWN"
+            ],
+            "$ref": "#/components/schemas/EnumPropertyTypeHabitationDto"
+          },
+          "wcCount": {
+            "type": "number"
+          }
+        }
+      },
+      "TypeLandDto": {
+        "type": "object",
+        "properties": {
+          "canConstruct": {
+            "type": "boolean"
+          },
+          "hasBuildingPermit": {
+            "type": "boolean"
+          },
+          "hasElectricity": {
+            "type": "boolean"
+          },
+          "hasTelecom": {
+            "type": "boolean"
+          },
+          "hasWater": {
+            "type": "boolean"
+          },
+          "isServiced": {
+            "type": "boolean"
+          },
+          "surface": {
+            "type": "number"
+          },
+          "surfaceConstructable": {
+            "type": "number"
+          },
+          "type": {
+            "example": "LAND_UNKNWON",
+            "$ref": "#/components/schemas/EnumLandTypeDto"
+          }
+        }
+      },
+      "AdCompleteLatLngDto": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "Longitude and latitude as an array of number, first longitude then latitude [lng, lat]",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "AdLocationDto": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "cityCoordinate": {
+            "description": "City coordinates - center of the city",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdCompleteLatLngDto"
+              }
+            ]
+          },
+          "department": {
+            "type": "string"
+          },
+          "inseeCode": {
+            "type": "string",
+            "description": "INSEE code of the city"
+          },
+          "irisCode": {
+            "type": "string",
+            "description": "IRIS code of the city"
+          },
+          "locationCoordinate": {
+            "description": "Coordinates of the property - could not be accurate or precise enough",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdCompleteLatLngDto"
+              }
+            ]
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code of the city"
+          }
+        }
+      },
+      "ImageDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "MediasDto": {
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImageDto"
+            }
+          },
+          "virtualVisitExternalUrl": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TypeParkingDto": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "numberOfCars": {
+            "type": "number"
+          },
+          "surface": {
+            "type": "number"
+          },
+          "type": {
+            "example": "PARKING_UNKNOWN",
+            "$ref": "#/components/schemas/EnumParkingTypeDto"
+          }
+        }
+      },
+      "SourceDto": {
+        "type": "object",
+        "properties": {
+          "flxId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          }
+        }
+      },
+      "OfferRentingContractDto": {
+        "type": "object",
+        "properties": {
+          "isColocation": {
+            "type": "boolean",
+            "description": "The offer is for a colocation"
+          },
+          "isLongTerm": {
+            "type": "boolean",
+            "description": "The offer is for long term renting (more than 6 months)"
+          },
+          "isShortTerm": {
+            "type": "boolean",
+            "description": "The offer is for short term renting (less than 6 months)"
+          },
+          "isSubLease": {
+            "type": "boolean",
+            "description": "The offer is for a sublease"
+          }
+        }
+      },
+      "OfferDto": {
+        "type": "object",
+        "properties": {
+          "isCurrentlyOccupied": {
+            "type": "boolean",
+            "description": "The property is sold with someone living in it"
+          },
+          "renting": {
+            "description": "Renting contract details",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OfferRentingContractDto"
+              }
+            ]
+          },
+          "type": {
+            "example": "OFFER_UNKNOWN",
+            "$ref": "#/components/schemas/EnumPropertyOfferTypeDto"
+          }
+        }
+      },
+      "AdvertDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "example": "EUR",
+            "description": "Currency of the advert",
+            "$ref": "#/components/schemas/EnumCurrencyDto"
+          },
+          "currentPrice": {
+            "description": "Current price of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdvertPriceDto"
+              }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the advert as it is on the source"
+          },
+          "firstSeenAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "flxId": {
+            "type": "string",
+            "description": "Unique identifier of the advert"
+          },
+          "habitation": {
+            "description": "Habitation details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TypeHabitationDto"
+              }
+            ]
+          },
+          "isAuction": {
+            "type": "boolean",
+            "description": "Is this advert an auction"
+          },
+          "isUrgent": {
+            "type": "boolean",
+            "description": "Is this advert marked as urgent"
+          },
+          "land": {
+            "description": "Land details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TypeLandDto"
+              }
+            ]
+          },
+          "lastModifiedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "location": {
+            "description": "Location details of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdLocationDto"
+              }
+            ]
+          },
+          "medias": {
+            "description": "Medias of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MediasDto"
+              }
+            ]
+          },
+          "parking": {
+            "description": "Parking details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TypeParkingDto"
+              }
+            ]
+          },
+          "scope": {
+            "example": "PRICING_ONE_OFF",
+            "description": "Pricing scope of the advert - mensual or onetime",
+            "$ref": "#/components/schemas/EnumPricingScopeDto"
+          },
+          "source": {
+            "description": "Source of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SourceDto"
+              }
+            ]
+          },
+          "tags": {
+            "description": "Unstructured tags of the advert",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the advert as it is on the source"
+          },
+          "type": {
+            "example": "CLASS_UNKNWON",
+            "description": "Type of the advert",
+            "$ref": "#/components/schemas/EnumPropertyClassDto"
+          },
+          "warrantyDeposit": {
+            "type": "number",
+            "description": "Warranty deposit for renting this property"
+          },
+          "offer": {
+            "description": "Offer details of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OfferDto"
+              }
+            ]
+          },
+          "mainPropertyAdFlxId": {
+            "type": "string",
+            "description": "FlxId of the first duplicated advert we found for this advertised property"
+          },
+          "propertyFlxId": {
+            "type": "string",
+            "description": "FlxId of the property this advert is linked to"
+          },
+          "isOnline": {
+            "type": "boolean",
+            "description": "Is the advert online or not"
+          },
+          "lastSeenAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Last time we saw this advert"
+          },
+          "isPro": {
+            "type": "boolean",
+            "description": "Is the seller a professional or not"
+          },
+          "seller": {
+            "description": "Seller details of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LightSellerDto"
+              }
+            ]
+          }
+        }
+      },
+      "SearchAdvertsResponseDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AdvertDto"
+                }
+              },
+              "searchAfterHash": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "items"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "FilterPropertyPriceDto": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/FilterSourceDto"
+          },
+          "value": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "valuePerArea": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          }
+        }
+      },
+      "FilterVariationDto": {
+        "type": "object",
+        "properties": {
+          "sinceLastModified": {
+            "description": "The value of the price variation in %",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterDoubleRangeDto"
+              }
+            ]
+          },
+          "sincePublished": {
+            "description": "The value of the price variation in %",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FilterDoubleRangeDto"
+              }
+            ]
+          }
+        }
+      },
+      "FilterPriceDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "array",
+            "example": "EUR",
+            "items": {
+              "$ref": "#/components/schemas/EnumCurrencyDto"
+            }
+          },
+          "initial": {
+            "$ref": "#/components/schemas/FilterPropertyPriceDto"
+          },
+          "isAuction": {
+            "type": "boolean"
+          },
+          "latest": {
+            "$ref": "#/components/schemas/FilterPropertyPriceDto"
+          },
+          "scope": {
+            "type": "array",
+            "example": "PRICING_ONE_OFF",
+            "items": {
+              "$ref": "#/components/schemas/EnumPricingScopeDto"
+            }
+          },
+          "warrantyDeposit": {
+            "$ref": "#/components/schemas/IntRangeDto"
+          },
+          "variation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterVariationDto"
+            }
+          }
+        }
+      },
+      "FilterPropertyAdvertDto": {
+        "type": "object",
+        "properties": {
+          "firstSeenAt": {
+            "$ref": "#/components/schemas/FilterDateRangeDto"
+          },
+          "flxId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isOnline": {
+            "type": "boolean"
+          },
+          "lastSeenAt": {
+            "$ref": "#/components/schemas/FilterDateRangeDto"
+          },
+          "location": {
+            "$ref": "#/components/schemas/FilterLatLngDto"
+          },
+          "price": {
+            "$ref": "#/components/schemas/FilterPriceDto"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SourceDto"
+          },
+          "isPro": {
+            "type": "boolean"
+          },
+          "seller": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LightSellerDto"
+            }
+          }
+        }
+      },
+      "FilterMetaDto": {
+        "type": "object",
+        "properties": {
+          "firstSeenAt": {
+            "$ref": "#/components/schemas/FilterDateRangeDto"
+          },
+          "isTotallyOffline": {
+            "type": "boolean"
+          },
+          "lastPublishedAt": {
+            "$ref": "#/components/schemas/FilterDateRangeDto"
+          },
+          "lastSeenAt": {
+            "$ref": "#/components/schemas/FilterDateRangeDto"
+          },
+          "lastUpdatedAt": {
+            "$ref": "#/components/schemas/FilterDateRangeDto"
+          }
+        }
+      },
+      "FilterPropertyDto": {
+        "type": "object",
+        "properties": {
+          "adverts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPropertyAdvertDto"
+            }
+          },
+          "habitation": {
+            "$ref": "#/components/schemas/FilterTypeHabitationDto"
+          },
+          "isUrgent": {
+            "type": "boolean"
+          },
+          "land": {
+            "$ref": "#/components/schemas/FilterTypeLandDto"
+          },
+          "location": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterLocationDto"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/FilterMetaDto"
+          },
+          "parking": {
+            "$ref": "#/components/schemas/FilterTypeParkingDto"
+          },
+          "price": {
+            "$ref": "#/components/schemas/FilterPriceDto"
+          },
+          "process": {
+            "type": "array",
+            "example": "PROCESS_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyProcessDto"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": "array",
+            "example": "CLASS_UNKNWON",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyClassDto"
+            }
+          },
+          "offer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterOfferDto"
+            }
+          }
+        }
+      },
+      "SearchPropertyQueryDto": {
+        "type": "object",
+        "properties": {
+          "filterProperty": {
+            "$ref": "#/components/schemas/FilterPropertyDto"
+          },
+          "fullTexts": {
+            "description": "Search terms for full text search. We'll search in title, description, and keywords for terms similar to these (typically, we'll use a fuzzy search).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "keywords": {
+            "description": "Search terms for keyword search. We'll search in title, description, and keywords for exact matches to these terms (typically, we'll use a term search).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "filterProperty",
+          "fullTexts",
+          "keywords"
+        ]
+      },
+      "SearchPropertyPayloadDto": {
+        "type": "object",
+        "properties": {
+          "orderBy": {
+            "example": "ASC",
+            "$ref": "#/components/schemas/EnumSearchRequestOrderByDto"
+          },
+          "search": {
+            "$ref": "#/components/schemas/SearchPropertyQueryDto"
+          },
+          "searchAfterHash": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "sortBy": {
+            "example": "RELEVANCE",
+            "$ref": "#/components/schemas/EnumSearchRequestSortByDto"
+          }
+        },
+        "required": [
+          "orderBy",
+          "search",
+          "size",
+          "sortBy"
+        ]
+      },
+      "PropertyPriceDto": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/SourceDto"
+          },
+          "value": {
+            "type": "number"
+          },
+          "valuePerArea": {
+            "type": "number"
+          }
+        }
+      },
+      "VariationDto": {
+        "type": "object",
+        "properties": {
+          "sinceLastModified": {
+            "type": "number",
+            "description": "The value of the price variation in %"
+          },
+          "sincePublished": {
+            "type": "number",
+            "description": "The value of the price variation in %"
+          },
+          "absoluteSinceLastModified": {
+            "type": "number",
+            "description": "The absolute value of the price variation in %"
+          },
+          "absoluteSincePublished": {
+            "type": "number",
+            "description": "The absolute value of the price variation in %"
+          }
+        }
+      },
+      "PriceDto": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "example": "EUR",
+            "$ref": "#/components/schemas/EnumCurrencyDto"
+          },
+          "initial": {
+            "description": "The initial price of the property - price of the first advert we found for this property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PropertyPriceDto"
+              }
+            ]
+          },
+          "isAuction": {
+            "type": "boolean"
+          },
+          "latest": {
+            "description": "The latest price of the property - price of the last advert we found for this property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PropertyPriceDto"
+              }
+            ]
+          },
+          "scope": {
+            "example": "PRICING_ONE_OFF",
+            "$ref": "#/components/schemas/EnumPricingScopeDto"
+          },
+          "warrantyDeposit": {
+            "type": "number"
+          },
+          "variation": {
+            "description": "The variation of the price between two states of the advert",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VariationDto"
+              }
+            ]
+          }
+        }
+      },
+      "PropertyAdvertDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "firstSeenAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "flxId": {
+            "type": "string"
+          },
+          "isOnline": {
+            "type": "boolean"
+          },
+          "lastSeenAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "location": {
+            "description": "Longitude and latitude as an array of number, first longitude then latitude [lng, lat]",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "medias": {
+            "$ref": "#/components/schemas/MediasDto"
+          },
+          "price": {
+            "$ref": "#/components/schemas/PriceDto"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SourceDto"
+          },
+          "title": {
+            "type": "string"
+          },
+          "offlineAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "isPro": {
+            "type": "boolean"
+          },
+          "seller": {
+            "$ref": "#/components/schemas/LightSellerDto"
+          }
+        }
+      },
+      "CompleteLatLngDto": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "Longitude and latitude as an array of number, first longitude then latitude [lng, lat]",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "LocationDto": {
+        "type": "object",
+        "properties": {
+          "city": {
+            "type": "string"
+          },
+          "cityCoordinate": {
+            "description": "The coordinates of the city center",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CompleteLatLngDto"
+              }
+            ]
+          },
+          "department": {
+            "type": "string"
+          },
+          "inseeCode": {
+            "type": "string"
+          },
+          "irisCode": {
+            "type": "string"
+          },
+          "locationCoordinate": {
+            "description": "Coordinates of the property - could not be accurate or precise enough",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CompleteLatLngDto"
+              }
+            ]
+          },
+          "postalCode": {
+            "type": "string"
+          }
+        }
+      },
+      "MetaDto": {
+        "type": "object",
+        "properties": {
+          "firstSeenAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "isTotallyOffline": {
+            "type": "boolean",
+            "description": "All the adverts of this property are offline - Meaning the property is not available anymore (sold, rented, etc.)"
+          },
+          "lastPublishedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "lastSeenAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "lastUpdatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          },
+          "totallyOfflineAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date should be in ISO format (ex: `2022-10-21T11:31:33.593Z`)",
+            "example": "2022-10-21T11:31:33.593Z"
+          }
+        }
+      },
+      "PropertyDto": {
+        "type": "object",
+        "properties": {
+          "adverts": {
+            "description": "List of adverts linked to this property - adverts can be from different sources, different prices, different agencies, etc.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PropertyAdvertDto"
+            }
+          },
+          "flxId": {
+            "type": "string",
+            "description": "Unique identifier of the property"
+          },
+          "habitation": {
+            "description": "Habitation characteristics of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TypeHabitationDto"
+              }
+            ]
+          },
+          "isUrgent": {
+            "type": "boolean",
+            "description": "Is the property marked as urgent"
+          },
+          "land": {
+            "description": "Land details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TypeLandDto"
+              }
+            ]
+          },
+          "location": {
+            "description": "Location details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LocationDto"
+              }
+            ]
+          },
+          "meta": {
+            "description": "Meta data of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MetaDto"
+              }
+            ]
+          },
+          "parking": {
+            "description": "Parking details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TypeParkingDto"
+              }
+            ]
+          },
+          "price": {
+            "description": "Price details of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriceDto"
+              }
+            ]
+          },
+          "tags": {
+            "description": "List of unstructured tags of the property",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "example": "CLASS_UNKNWON",
+            "description": "Type of the property",
+            "$ref": "#/components/schemas/EnumPropertyClassDto"
+          },
+          "offer": {
+            "description": "Offer information of the property",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OfferDto"
+              }
+            ]
+          }
+        }
+      },
+      "SearchPropertiesResponseDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PropertyDto"
+                }
+              },
+              "searchAfterHash": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "items"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SaveSearchPropertiesPayloadDto": {
+        "type": "object",
+        "properties": {
+          "search_query": {
+            "$ref": "#/components/schemas/SearchPropertyQueryDto"
+          },
+          "webhook_url": {
+            "type": "string"
+          },
+          "search_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "search_query"
+        ]
+      },
+      "SavedSearchResponseDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "alert_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "alert_id"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "ManySaveSearchPropertiesPayloadDto": {
+        "type": "object",
+        "properties": {
+          "search_query": {
+            "$ref": "#/components/schemas/SearchPropertyQueryDto"
+          },
+          "alert_id": {
+            "type": "string"
+          },
+          "search_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "search_query",
+          "alert_id"
+        ]
+      },
+      "SaveSearchAdvertsPayloadDto": {
+        "type": "object",
+        "properties": {
+          "search_query": {
+            "$ref": "#/components/schemas/SearchAdvertQueryDto"
+          },
+          "webhook_url": {
+            "type": "string"
+          },
+          "search_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "search_query"
+        ]
+      },
+      "ManySaveSearchAdvertsPayloadDto": {
+        "type": "object",
+        "properties": {
+          "search_query": {
+            "$ref": "#/components/schemas/SearchAdvertQueryDto"
+          },
+          "alert_id": {
+            "type": "string"
+          },
+          "search_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "search_query",
+          "alert_id"
+        ]
+      },
+      "AnalyticsBoxplotValueDto": {
+        "type": "object",
+        "properties": {
+          "lower": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "q1": {
+            "type": "number"
+          },
+          "q2": {
+            "type": "number"
+          },
+          "q3": {
+            "type": "number"
+          },
+          "upper": {
+            "type": "number"
+          }
+        }
+      },
+      "AnalyticsStandardDeviationBoundsDto": {
+        "type": "object",
+        "properties": {
+          "lower": {
+            "type": "number"
+          },
+          "lowerPopulation": {
+            "type": "number"
+          },
+          "lowerSampling": {
+            "type": "number"
+          },
+          "upper": {
+            "type": "number"
+          },
+          "upperPopulation": {
+            "type": "number"
+          },
+          "upperSampling": {
+            "type": "number"
+          }
+        }
+      },
+      "AnalyticsAdvancedSummaryValueDto": {
+        "type": "object",
+        "properties": {
+          "avg": {
+            "type": "number"
+          },
+          "count": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "stdDeviation": {
+            "type": "number"
+          },
+          "stdDeviationBounds": {
+            "$ref": "#/components/schemas/AnalyticsStandardDeviationBoundsDto"
+          },
+          "stdDeviationPopulation": {
+            "type": "number"
+          },
+          "stdDeviationSampling": {
+            "type": "number"
+          },
+          "sum": {
+            "type": "number"
+          },
+          "sumOfSquares": {
+            "type": "number"
+          },
+          "variance": {
+            "type": "number"
+          },
+          "variancePopulation": {
+            "type": "number"
+          },
+          "varianceSampling": {
+            "type": "number"
+          }
+        }
+      },
+      "AnalyticsSummaryValueDto": {
+        "type": "object",
+        "properties": {
+          "avg": {
+            "type": "number"
+          },
+          "count": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "sum": {
+            "type": "number"
+          }
+        }
+      },
+      "AnalyticsAnalysisDto": {
+        "type": "object",
+        "properties": {
+          "boxplotValue": {
+            "$ref": "#/components/schemas/AnalyticsBoxplotValueDto"
+          },
+          "advancedKpiValue": {
+            "$ref": "#/components/schemas/AnalyticsAdvancedSummaryValueDto"
+          },
+          "summaryValue": {
+            "$ref": "#/components/schemas/AnalyticsSummaryValueDto"
+          }
+        }
+      },
+      "FilterPropertyLightDto": {
+        "type": "object",
+        "properties": {
+          "habitation": {
+            "$ref": "#/components/schemas/FilterTypeHabitationDto"
+          },
+          "land": {
+            "$ref": "#/components/schemas/FilterTypeLandDto"
+          },
+          "location": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterLocationDto"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/FilterMetaDto"
+          },
+          "parking": {
+            "$ref": "#/components/schemas/FilterTypeParkingDto"
+          },
+          "price": {
+            "$ref": "#/components/schemas/FilterPriceDto"
+          },
+          "process": {
+            "type": "array",
+            "example": "PROCESS_UNKNOWN",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyProcessDto"
+            }
+          },
+          "type": {
+            "type": "array",
+            "example": "CLASS_UNKNWON",
+            "items": {
+              "$ref": "#/components/schemas/EnumPropertyClassDto"
+            }
+          },
+          "offer": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterOfferDto"
+            }
+          }
+        }
+      },
+      "SearchPropertyQueryLightDto": {
+        "type": "object",
+        "properties": {
+          "filterProperty": {
+            "$ref": "#/components/schemas/FilterPropertyLightDto"
+          }
+        }
+      },
+      "AnalyticsAnalyzedTypeEnumDto": {
+        "type": "string",
+        "enum": [
+          "PRICE_ANALYZED_TYPE",
+          "PRICE_PER_AREA_ANALYZED_TYPE"
+        ]
+      },
+      "AnalyticsGeneralAnalyticTypeEnumDto": {
+        "type": "string",
+        "enum": [
+          "SUMMARY_ANALYSIS_TYPE",
+          "ADVANCED_ANALYSIS_TYPE",
+          "BOX_PLOT_ANALYSIS_TYPE",
+          "PERCENTILES_ANALYSIS_TYPE"
+        ]
+      },
+      "AnalyticsGeneralAnalyticsRequestDto": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/SearchPropertyQueryLightDto"
+          },
+          "studiedData": {
+            "example": "PRICE_ANALYZED_TYPE",
+            "$ref": "#/components/schemas/AnalyticsAnalyzedTypeEnumDto"
+          },
+          "type": {
+            "example": "SUMMARY_ANALYSIS_TYPE",
+            "$ref": "#/components/schemas/AnalyticsGeneralAnalyticTypeEnumDto"
+          }
+        },
+        "required": [
+          "query",
+          "studiedData",
+          "type"
+        ]
+      },
+      "EnumArtificialimmoPropertyDto": {
+        "type": "string",
+        "enum": [
+          "HOUSE",
+          "FLAT"
+        ]
+      },
+      "ArtificialimmoMarketEstimationDataDto": {
+        "type": "object",
+        "properties": {
+          "bedroomsCount": {
+            "type": "number"
+          },
+          "isRecent": {
+            "type": "boolean"
+          },
+          "landSurfaceArea": {
+            "type": "number"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "newProperty": {
+            "type": "boolean"
+          },
+          "pool": {
+            "type": "boolean"
+          },
+          "propertyType": {
+            "example": "HOUSE",
+            "description": "Type of the property",
+            "$ref": "#/components/schemas/EnumArtificialimmoPropertyDto"
+          },
+          "roomsCount": {
+            "type": "number"
+          },
+          "surfaceArea": {
+            "type": "number"
+          },
+          "workToDo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "bedroomsCount",
+          "isRecent",
+          "landSurfaceArea",
+          "lat",
+          "lon",
+          "newProperty",
+          "pool",
+          "propertyType",
+          "roomsCount",
+          "surfaceArea",
+          "workToDo"
+        ]
+      },
+      "ArtificialimmoMarketEstimateRequestDto": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "description": "Properties to estimate",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ArtificialimmoMarketEstimationDataDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "property"
+        ]
+      },
+      "EnumArtificialimmoConfidenceDto": {
+        "type": "string",
+        "enum": [
+          "VERY_LOW",
+          "LOW",
+          "MEDIUM",
+          "HIGH"
+        ]
+      },
+      "ArtificialimmoEstimationResponseDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "confidence": {
+                "example": "VERY_LOW",
+                "description": "Confidence of the estimation",
+                "$ref": "#/components/schemas/EnumArtificialimmoConfidenceDto"
+              },
+              "value": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "confidence",
+              "value"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SampleWebhookAdvertsItemDto": {
+        "type": "object",
+        "properties": {
+          "adverts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvertDto"
+            }
+          },
+          "alert_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "adverts",
+          "alert_id"
+        ]
+      },
+      "SampleWebhookAdvertsResponseDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "created": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SampleWebhookAdvertsItemDto"
+                }
+              }
+            },
+            "required": [
+              "created"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      },
+      "SampleWebhookPropertiesItemDto": {
+        "type": "object",
+        "properties": {
+          "properties": {
+            "description": "List of property flxIds",
+            "example": [
+              "7364690d-2487-46d1-832d-c5ae1cf6e861",
+              "3fcf2348-756d-40e2-9bcd-3c4fd02f51d8"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "alert_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "properties",
+          "alert_id"
+        ]
+      },
+      "SampleWebhookPropertiesResponseDto": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "created": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SampleWebhookPropertiesItemDto"
+                }
+              }
+            },
+            "required": [
+              "created"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "x-tagGroups": [
+    {
+      "name": "General",
+      "tags": [
+        "System"
+      ]
+    },
+    {
+      "name": "Properties",
+      "tags": [
+        "Properties",
+        "Properties Search",
+        "Properties Alerts"
+      ]
+    },
+    {
+      "name": "Adverts",
+      "tags": [
+        "Adverts",
+        "Adverts Search",
+        "Adverts Alerts"
+      ]
+    },
+    {
+      "name": "Samples",
+      "tags": [
+        "Sample Properties",
+        "Sample Adverts"
+      ]
+    },
+    {
+      "name": "Analytics",
+      "tags": [
+        "Analytics"
+      ]
+    },
+    {
+      "name": "Estimations",
+      "tags": [
+        "Estimations"
+      ]
+    },
+    {
+      "name": "Models",
+      "tags": [
+        "PropertyModel",
+        "AdvertModel"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://api.fluximmo.io/swagger",
-  "openapi": "https://api.fluximmo.io/swagger",
+  "$schema": "https://mintlify.com/schema.json",
+  "openapi": "/swagger.json",
   "name": "Real-estate data API - Fluximmo V2 (2.0.0)",
   "logo": {
     "dark": "/logo/logo_square_fluximmo.png",
