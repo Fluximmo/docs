@@ -149,12 +149,6 @@
           ]
         }
       ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/adverts/get-adverts-byt-their-flx_id.mdx"
-      ]
     }
   ],
   "footerSocials": {
