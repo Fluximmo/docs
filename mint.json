@@ -34,6 +34,10 @@
     {
       "name": "API V2 Reference",
       "url": "api-v2-reference"
+    },
+    {
+      "name": "API Geo Reference",
+      "url": "api-geography-reference"
     }
   ],
   "anchors": [
@@ -61,6 +65,19 @@
     {
       "group": "Main concepts",
       "pages": ["doc/main-concepts/properties-adverts", "doc/main-concepts/webhooks"]
+    },
+    {
+      "group": "API Geo Reference",
+      "pages": [
+        {
+          "group": "Geographies",
+          "pages": [
+            "api-geography-reference/geographies/geocoding--retrieve-structured-geo-related-data-from-user-input",
+            "api-geography-reference/geographies/detectlocation--extract-from-a-text-geographical-reference-and-obtain-related-locations-context-is-used-to-provide-better-results",
+            "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point"
+          ]
+        }
+      ]
     },
     {
       "group": "API System",
