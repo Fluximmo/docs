@@ -10,18 +10,17 @@
   "colors": {
     "primary": "#ED0040",
     "light": "#ED0040",
-    "dark": "#ED0040",
-    "ultraLight": "#E5D8FB",
-    "ultraDark": "#212A36",
+    "dark": "#7274E4",
     "background": {
-      "dark": "#121212"
+      "dark": "#0D0C1E",
+      "light": "#F8F8F8"
     },
     "anchors": {
       "from": "#5b21b6",
       "to": "#a21caf"
     }
   },
-  "backgroundImage": "/images/background.jpg",
+  "backgroundImage": "/images/background.png",
   "feedback": {
     "thumbsRating": true
   },
