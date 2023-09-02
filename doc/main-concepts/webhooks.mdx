@@ -1,0 +1,103 @@
+---
+title: "Webhooks"
+description: "Webhooks are a lightweight solution for delivering real-time notifications and data updates, eliminating the need for a comprehensive API."
+---
+
+## Real-Estate Adverts in Real-Time: Harnessing Webhooks
+
+We provide you with the capability to seamlessly receive real estate adverts data in real-time through the utilization of webhooks. As soon as we gather the data, it is promptly transmitted, ensuring that you gain access within moments.
+
+Furthermore, by employing ALERTS, you possess the ability to receive new adverts that align with your specific criteria via a webhook.
+
+## Webhook Differences Between Adverts and Properties
+
+Due to the inherently dynamic nature of properties, which undergo continuous evolution including the merging of duplicated ads and consolidation of new data, our approach to webhooks differs for properties. Specifically, for properties, we do not facilitate the transmission of the entire property body through webhooks. Instead, the properties webhook exclusively furnishes the list of FlxIds of properties that match your search parameters.
+
+Below, you will find the schema illustrating the data that you will receive on your webhook endpoints: [Sample averts](/api-v2-reference/sample-adverts/sample-advert-webhook-body) and [Sample properties](/api-v2-reference/sample-properties/sample-properties-webhook-body).
+
+## Unveiling the Concept of Webhooks
+
+A webhook can be understood as a specialized API that operates based on events rather than traditional requests. Unlike one application making a request to another and awaiting a response, a webhook acts as a service that allows one program to promptly send data to another as soon as a specific event occurs.
+
+Webhooks are often referred to as "reverse APIs" as they initiate communication from the sending application to the receiving one.
+
+With the increasing interconnectedness of web services, webhooks are emerging as a lightweight solution for delivering real-time notifications and data updates, eliminating the need for a comprehensive API.
+
+## Webhooks vs. REST API: Optimal Usage Scenarios
+
+The choice between a webhook and a REST API is dependent on specific scenarios:
+
+- Dealing with a significant volume of data, either frequently or intermittently
+- Seeking real-time data updates
+- Preferring a passive approach without requiring cron jobs or frequent API calls
+
+## Practical Examples of Webhook Implementation
+
+Implementing a webhook is straightforward and involves creating a POST endpoint for requests. Below, you will find examples of webhook implementation in both Python and Node.js:
+
+<AccordionGroup>
+    <Accordion title="Python" icon="alien-8bit">
+        ```python
+        # Simple Python Flask webhook example (see full example in step 3)
+        # Requires installing flask: 'pip install flask'
+        import os
+        from flask import Flask, request, abort
+
+        app = Flask(__name__)
+
+        # Route to accept webhook notifications from Fluximmo
+        @app.route('/webhooks/fluximmo', methods=['POST'])
+        def index():
+        for advert in request.get_json(silent=True)['adverts']:
+        print(advert)
+        # It's a good time to insert the data in your pipeline or save it to your DB
+
+        return 'Webhook Received', 200
+
+        @app.route('/')
+        def hello_world():
+        return 'Hello World !'
+
+        if __name__ == "__main__":
+        host = os.getenv('HOST', '0.0.0.0')
+        port = int(os.getenv('PORT', 3000))
+        print('Example App unning on http://' + str(port) + ':' + str(host))
+        app.run(host=host, port=port)
+        ```
+    </Accordion>
+
+    <Accordion title="Node" icon="alien-8bit">
+        ```js
+        // Simple Node Express webhook example (see full example in step 3)
+        // Requires installing express: 'npm install --save express'
+        const express = require('express');
+        const app = express();
+
+        /**
+        * Fluximmo Webhook Route
+        * Route to accept webhook notifications from Fluximmo
+        **/
+        app.use('/webhooks/fluximmo', (req, res, next) => {
+        console.log(`Webhook received`);
+
+        req.body().adverts.flatMap(advert => {
+        console.log(advert)
+        // It's a good time to insert the data in your pipeline or save it to your DB
+    })
+
+        res.send('Webhook Received', 200);
+    });
+
+        app.get('/', (req, res) => res.send('Hello World'))
+
+        const HOST = process.env.HOST || '0.0.0.0';
+        const PORT = process.env.PORT || 8080;
+        app.listen(PORT, HOST);
+        console.log(`Example App Running on http://${HOST}:${PORT}`);
+        ```
+    </Accordion>
+</AccordionGroup>
+
+## In Conclusion
+
+A comprehensive understanding of the distinctions between properties and adverts is crucial for optimizing the utilization of our real estate data. Through webhooks, you can seamlessly access real-time data, particularly when utilizing ALERTS to receive new adverts that align with your specified criteria.

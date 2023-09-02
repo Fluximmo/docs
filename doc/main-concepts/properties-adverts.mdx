@@ -1,0 +1,43 @@
+---
+title: Properties & Adverts
+description: "Real-estate market can be conceptualized in different ways. We offer two different conceptualization depending on your needs: Properties & Adverts."
+---
+
+## Introduction
+
+Understanding the distinctions between properties and adverts within our real estate data ecosystem is crucial for effective data utilization. This documentation provides an in-depth overview of the differences and use cases of properties and adverts.
+
+## Properties (BAAS)
+
+Properties represent tangible real estate assets and act as containers for related adverts. They offer a consolidated view of information and are essential for understanding the broader context of real estate assets.
+
+- **Advert Aggregation:** Our platform gathers all adverts associated with a specific property: these adverts are either duplicates from different portals, mandates from different agencies or republication of the same advertising (price update etc...)
+
+- **De-Duplication:** Properties gathers duplicate adverts from various sources, ensuring data accuracy and reducing redundancy. This is particularly valuable when dealing with multiple adverts from different portals or agencies.
+
+- **Consolidation of Information:** Properties also consolidate different pieces of information gathered from all its adverts. This provides a comprehensive overview of the property's attributes.
+
+- **Dynamic Evolution:** Properties evolve over time as new adverts are added or existing ones are updated. This continuous integration ensures that the property's data remains relevant and current.
+
+<Tip>
+    Due to the dynamic nature of properties, API integration is the primary method for accessing property data. Webhooks do not support property data retrieval, as properties are in a state of constant change.
+</Tip>
+
+## Adverts (BAAS and WEBHOOK)
+
+Adverts are individual real estate advertising sourced from various platforms. They are integral to understanding the specifics of each listing and its characteristics.
+
+- **De-Duplication and Association:** Our proprietary AI algorithms de-duplicate adverts, associating each advert with it's duplicated parent if any.
+
+- **Uniqueness via URLs:** Adverts are uniquely identified by their URLs. Republishing the same advert with a different URL results in separate entries, promoting accurate data representation.
+
+<Tip>
+    Adverts can be accessed via both APIs (Search or Alerts) and webhooks, providing flexibility in how you retrieve and integrate advert data.
+</Tip>
+
+## Conclusion
+
+Understanding the differences between properties and adverts is pivotal for optimizing your real estate data usage. Properties offer consolidated context and evolve dynamically, while adverts provide specific listing details. APIs are the preferred means to access both properties and adverts, offering comprehensive and adaptable data retrieval options.
+
+For any technical inquiries or further clarification, please reach out to our technical support team.
+

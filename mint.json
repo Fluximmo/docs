@@ -3,151 +3,167 @@
   "openapi": "/swagger.json",
   "name": "Real-estate data API - Fluximmo V2 (2.0.0)",
   "logo": {
-    "dark": "/images/logo/fluximmo_logo.png",
-    "light": "/images/logo/fluximmo_logo.png"
+    "dark": "/images/logo/logo_text_light.png",
+    "light": "/images/logo/logo_text.png"
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#9563FF",
-    "light": "#AE87FF",
-    "dark": "#0D001D",
+    "primary": "#ED0040",
+    "light": "#ED0040",
+    "dark": "#ED0040",
+    "ultraLight": "#E5D8FB",
+    "ultraDark": "#212A36",
     "background": {
-      "dark": "#090014"
+      "dark": "#121212"
     },
     "anchors": {
-      "from": "#FF7F57",
-      "to": "#9563FF"
+      "from": "#5b21b6",
+      "to": "#a21caf"
     }
   },
+  "backgroundImage": "/images/background.jpg",
   "feedback": {
     "thumbsRating": true
   },
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Contact us",
       "url": "mailto:contact@fluximmo.com"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://my.fluximmo.com"
-  },
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "API V2 Reference",
+      "url": "api-v2-reference"
     }
   ],
   "anchors": [
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "introduction"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "name": "Book a call",
+      "icon": "phone",
+      "url": "https://calendly.com/fluximmo"
     },
     {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Contact us",
+      "icon": "envelope",
+      "url": "mailto:contact@fluximmo.com"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": ["introduction", "authentification"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
+      "group": "Main concepts",
+      "pages": ["doc/main-concepts/properties-adverts", "doc/main-concepts/webhooks"]
     },
     {
-      "group": "API Documentation",
+      "group": "API System",
       "pages": [
         {
           "group": "System",
           "pages": [
-            "api-reference/system/getversion",
-            "api-reference/system/healthz",
-            "api-reference/system/get-the-list-of-real-estate-platforms"
+            "api-v2-reference/system/getversion",
+            "api-v2-reference/system/healthz",
+            "api-v2-reference/system/get-the-list-of-real-estate-platforms"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "group": "API Properties",
+      "pages": [
         {
-          "group": "Adverts Search",
+          "group": "Samples",
           "pages": [
-            "api-reference/adverts-search/search-adverts"
-          ]
-        },
-        {
-          "group": "Properties Search",
-          "pages": [
-            "api-reference/properties-search/search-properties"
-          ]
-        },
-        {
-          "group": "Sample Properties",
-          "pages": [
-            "api-reference/sample-properties/get-a-sample-of-properties",
-            "api-reference/sample-properties/sample-properties-webhook-body"
+            "api-v2-reference/sample-properties/get-a-sample-of-properties",
+            "api-v2-reference/sample-properties/sample-properties-webhook-body"
           ]
         },
         {
           "group": "Properties",
           "pages": [
-            "api-reference/properties/get-properties-byt-their-flx_id",
-            "api-reference/properties/retrieve-a-property-by-url"
+            "api-v2-reference/properties/get-properties-byt-their-flx_id",
+            "api-v2-reference/properties/retrieve-a-property-by-url",
+            "api-v2-reference/properties-search/search-properties"
           ]
         },
         {
           "group": "Properties Alerts",
           "pages": [
-            "api-reference/properties-alerts/create-a-new-alert-for-this-property-search",
-            "api-reference/properties-alerts/get-the-search-criteria-of-a-propertyalert",
-            "api-reference/properties-alerts/deactivate-a-property-search-alert",
-            "api-reference/properties-alerts/update-the-search-criteria-of-a-property-alert",
-            "api-reference/properties-alerts/get-all-your-property-alerts",
-            "api-reference/properties-alerts/get-history-of-match-properties-by-its-saved-search-flxid"
+            "api-v2-reference/properties-alerts/create-a-new-alert-for-this-property-search",
+            "api-v2-reference/properties-alerts/get-the-search-criteria-of-a-propertyalert",
+            "api-v2-reference/properties-alerts/deactivate-a-property-search-alert",
+            "api-v2-reference/properties-alerts/update-the-search-criteria-of-a-property-alert",
+            "api-v2-reference/properties-alerts/get-all-your-property-alerts",
+            "api-v2-reference/properties-alerts/get-history-of-match-properties-by-its-saved-search-flxid"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "API Adverts",
+      "pages": [
+        {
+          "group": "Samples",
+          "pages": [
+            "api-v2-reference/sample-adverts/get-a-sample-of-ads",
+            "api-v2-reference/sample-adverts/sample-advert-webhook-body"
           ]
         },
         {
           "group": "Adverts",
           "pages": [
-            "api-reference/adverts/get-adverts-byt-their-flx_id"
+            "api-v2-reference/adverts/get-adverts-byt-their-flx_id",
+            "api-v2-reference/adverts-search/search-adverts"
           ]
         },
         {
           "group": "Adverts Alerts",
           "pages": [
-            "api-reference/adverts-alerts/create-a-new-advert-alert-for-this-search",
-            "api-reference/adverts-alerts/get-the-search-criteria-of-an-advert-alert",
-            "api-reference/adverts-alerts/deactivate-a-search-advert-alert",
-            "api-reference/adverts-alerts/update-the-search-criteria-of-an-advert-alert",
-            "api-reference/adverts-alerts/get-all-your-advert-alerts",
-            "api-reference/adverts-alerts/get-history-of-match-adverts-by-its-saved-search-flxid"
+            "api-v2-reference/adverts-alerts/create-a-new-advert-alert-for-this-search",
+            "api-v2-reference/adverts-alerts/get-the-search-criteria-of-an-advert-alert",
+            "api-v2-reference/adverts-alerts/deactivate-a-search-advert-alert",
+            "api-v2-reference/adverts-alerts/update-the-search-criteria-of-an-advert-alert",
+            "api-v2-reference/adverts-alerts/get-all-your-advert-alerts",
+            "api-v2-reference/adverts-alerts/get-history-of-match-adverts-by-its-saved-search-flxid"
           ]
-        },
-        {
-          "group": "Sample Adverts",
-          "pages": [
-            "api-reference/sample-adverts/get-a-sample-of-ads",
-            "api-reference/sample-adverts/sample-advert-webhook-body"
-          ]
-        },
+        }
+      ]
+    },
+    {
+      "group": "API Analytics",
+      "pages": [
         {
           "group": "Analytics",
           "pages": [
-            "api-reference/analytics/get-analytics-data-for-a-given-context-property-location-"
+            "api-v2-reference/analytics/get-analytics-data-for-a-given-context-property-location-"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "group": "API Estimation",
+      "pages": [
         {
           "group": "Estimations",
           "pages": [
-            "api-reference/estimations/estimate-the-price-of-a-property"
+            "api-v2-reference/estimations/estimate-the-price-of-a-property"
           ]
         }
+      ]
+    },
+    {
+      "group": "API Models",
+      "pages": [
+        "api-v2-reference/_api-models/property",
+        "api-v2-reference/_api-models/advert"
       ]
     }
   ],

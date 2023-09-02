@@ -1,0 +1,30 @@
+---
+title: Authentification
+description: "To get started using the Fluximmo API, you'll need to get an API-KEY"
+---
+
+In order to streamline your experience and ensure the best outcomes, we have implemented a process that involves an introduction call prior to generating API keys.
+
+At Fluximmo, we view our clients as partners on a collaborative journey. The introduction call serves as a fundamental step to establish effective communication, align our services with your requirements, and set the stage for a successful partnership.
+
+1. Personalized Solution: Each client's needs are unique. The introduction call provides a way for you to share your specific goals, challenges, and expectations. This insight enables us to customize our API services to best address your individual requirements.
+
+2. Strategic Alignment: Through this call, we gain a deep understanding of your business objectives. This alignment allows us to recommend the most relevant API solutions that will contribute to your success.
+
+3. Direct Engagement: The introduction call allows you to interact with our experienced team members who possess in-depth knowledge of our APIs and their capabilities. You can ask questions, seek clarifications, and gain insights that are tailored to your use case.
+
+4. Effective Onboarding: Generating API keys after the introduction call ensures that the keys are configured to your specific needs. This targeted approach streamlines your onboarding process, minimizing technical challenges and optimizing your API usage.
+
+### How to Schedule an Introduction Call:
+
+Booking an introduction call is simple and convenient. Visit the following link: https://calendly.com/fluximmo/introduction to select a suitable time slot. During the call, our team will guide you through our services, address your queries, and set the stage for a collaborative partnership.
+
+Book an introduction call with a member of our team at the following link: [https://calendly.com/fluximmo/introduction](https://calendly.com/fluximmo/introduction)
+
+## X-API-KEY
+
+Api-key must be included in the Authorization HTTP header in all requests as a type x-api-key.
+
+```bash
+curl --location --request GET 'https://api.fluximmo.io/v2/protected/admin/consumption?from_date=2023-08-01&to_date=2023-09-01' --header 'x-api-key: YOUR_API_KEY'
+```
