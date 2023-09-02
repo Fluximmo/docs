@@ -3,8 +3,8 @@
   "openapi": "/swagger.json",
   "name": "Real-estate data API - Fluximmo V2 (2.0.0)",
   "logo": {
-    "dark": "/logo/logo_square_fluximmo.png",
-    "light": "/logo/logo_square_fluximmo.png"
+    "dark": "/images/logo/fluximmo_logo.png",
+    "light": "/images/logo/fluximmo_logo.png"
   },
   "favicon": "/favicon.png",
   "colors": {
