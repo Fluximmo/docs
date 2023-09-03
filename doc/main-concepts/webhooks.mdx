@@ -48,21 +48,21 @@ Implementing a webhook is straightforward and involves creating a POST endpoint 
         # Route to accept webhook notifications from Fluximmo
         @app.route('/webhooks/fluximmo', methods=['POST'])
         def index():
-        for advert in request.get_json(silent=True)['adverts']:
-        print(advert)
-        # It's a good time to insert the data in your pipeline or save it to your DB
+            for advert in request.get_json(silent=True)['adverts']:
+            print(advert)
+            # It's a good time to insert the data in your pipeline or save it to your DB
 
-        return 'Webhook Received', 200
+            return 'Webhook Received', 200
 
         @app.route('/')
         def hello_world():
-        return 'Hello World !'
+            return 'Hello World !'
 
         if __name__ == "__main__":
-        host = os.getenv('HOST', '0.0.0.0')
-        port = int(os.getenv('PORT', 3000))
-        print('Example App unning on http://' + str(port) + ':' + str(host))
-        app.run(host=host, port=port)
+            host = os.getenv('HOST', '0.0.0.0')
+            port = int(os.getenv('PORT', 3000))
+            print('Example App unning on http://' + str(port) + ':' + str(host))
+            app.run(host=host, port=port)
         ```
     </Accordion>
 
@@ -78,15 +78,15 @@ Implementing a webhook is straightforward and involves creating a POST endpoint 
         * Route to accept webhook notifications from Fluximmo
         **/
         app.use('/webhooks/fluximmo', (req, res, next) => {
-        console.log(`Webhook received`);
+            console.log(`Webhook received`);
 
-        req.body().adverts.flatMap(advert => {
-        console.log(advert)
-        // It's a good time to insert the data in your pipeline or save it to your DB
-    })
+            req.body().adverts.flatMap(advert => {
+                console.log(advert)
+                // It's a good time to insert the data in your pipeline or save it to your DB
+            })
 
-        res.send('Webhook Received', 200);
-    });
+            res.send('Webhook Received', 200);
+        });
 
         app.get('/', (req, res) => res.send('Hello World'))
 
