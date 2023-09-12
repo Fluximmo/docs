@@ -1,0 +1,2 @@
+            "api-v2-reference/properties-search/count-properties-for-search",
+            "api-v2-reference/adverts-search/count-adverts-for-search"
