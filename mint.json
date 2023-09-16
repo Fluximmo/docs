@@ -38,6 +38,10 @@
     {
       "name": "API Geo Reference",
       "url": "api-geography-reference"
+    },
+    {
+      "name": "API Experimental Reference",
+      "url": "api-experimental-reference"
     }
   ],
   "anchors": [
@@ -60,11 +64,17 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "authentification"]
+      "pages": [
+        "introduction",
+        "authentification"
+      ]
     },
     {
       "group": "Main concepts",
-      "pages": ["doc/main-concepts/properties-adverts", "doc/main-concepts/webhooks"]
+      "pages": [
+        "doc/main-concepts/properties-adverts",
+        "doc/main-concepts/webhooks"
+      ]
     },
     {
       "group": "API Geo Reference",
@@ -73,8 +83,37 @@
           "group": "Geographies",
           "pages": [
             "api-geography-reference/geographies/geocoding--retrieve-structured-geo-related-data-from-user-input",
-            "api-geography-reference/geographies/detectlocation--extract-from-a-text-geographical-reference-and-obtain-related-locations-context-is-used-to-provide-better-results",
             "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "API Experimental Reference",
+      "pages": [
+        {
+          "group": "Analytics",
+          "pages": [
+            "api-experimental-reference/analytics/combined--obtains-statistics-by-combining-two-fields-with-each-others",
+            "api-experimental-reference/analytics/count--count-the-number-of-properties-matching-the-given-query",
+            "api-experimental-reference/analytics/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
+            "api-experimental-reference/analytics/geoaggregateanalytics-summarizes-historical-immos-data-as-metrics-and-statistics-based-on-geospatial-grouping",
+            "api-experimental-reference/analytics/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
+            "api-experimental-reference/analytics/trendanalysis--retrieve-trends-of-historical-immos-market"
+          ]
+        },
+        {
+          "group": "City",
+          "pages": [
+            "api-experimental-reference/city/getadministrativeinfo--obtain-a-summary-of-city-on-the-adminstrative-aspect-such-as-regulation-and-taxation-infromation",
+            "api-experimental-reference/city/getemployementstatistics--obtain-city-related-employment-statistics",
+            "api-experimental-reference/city/gethealthstatistics--obtain-city-related-health-statistics",
+            "api-experimental-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
+            "api-experimental-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area",
+            "api-experimental-reference/city/getmarketstatistics--obtain-citys-market-statistics",
+            "api-experimental-reference/city/getpopulationinfo--obtain-citys-population-main-information",
+            "api-experimental-reference/city/getsecuritystatistics--obtain-citys-security-statistics",
+            "api-experimental-reference/city/getsummary--obtain-a-summary-of-city-statistics"
           ]
         }
       ]
