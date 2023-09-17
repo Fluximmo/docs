@@ -1,4 +1,4 @@
-swagger=$(echo "$(curl -X 'GET' 'https://converter.swagger.io/api/convert?url=https%3A%2F%2Felasticimmo.prod.services.f6o.io%2Fswagger%2Fgeography%2Fgeography.swagger.json' -H 'accept: application/json')" | sed 's|\"/\"|\"https://elasticimmo-doc.prod.services.f6o.io/\"|g')
+swagger=$(echo "$(curl -X 'GET' 'https://converter.swagger.io/api/convert?url=https%3A%2F%2Felasticimmo.prod.services.f6o.io%2Fswagger%2Fgeography%2Fgeography.swagger.json' -H 'accept: application/json')" | sed 's|\"/\"|\"https://elasticimmo-doc.prod.services.f6o.io"|g')
 echo $swagger > swagger-geography.json
 npx @mintlify/scraping@3.0.33 openapi-file ./swagger-geography.json -o api-geography-reference
 #https://elasticimmo-doc.prod.services.f6o.io/
