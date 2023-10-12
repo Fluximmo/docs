@@ -115,6 +115,15 @@
             "api-experimental-reference/city/getsecuritystatistics--obtain-citys-security-statistics",
             "api-experimental-reference/city/getsummary--obtain-a-summary-of-city-statistics"
           ]
+        },
+        {
+          "group": "DVF",
+          "pages": [
+            "api-experimental-reference/dvf/combineddvfanalytics--retrieve-combined-statistics",
+            "api-experimental-reference/dvf/generaldvfanalytics--retrieve-advanced-statistics-of-transactions",
+            "api-experimental-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
+            "api-experimental-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
+          ]
         }
       ]
     },
