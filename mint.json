@@ -83,7 +83,8 @@
           "group": "Geographies",
           "pages": [
             "api-geography-reference/geographies/geocoding--retrieve-structured-geo-related-data-from-user-input",
-            "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point"
+            "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point",
+            "api-geography-reference/geographies/detectlocation--extract-from-a-text-geographical-reference-and-obtain-related-locations-context-is-used-to-provide-better-results"
           ]
         }
       ]
@@ -99,7 +100,8 @@
             "api-experimental-reference/analytics/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
             "api-experimental-reference/analytics/geoaggregateanalytics-summarizes-historical-immos-data-as-metrics-and-statistics-based-on-geospatial-grouping",
             "api-experimental-reference/analytics/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
-            "api-experimental-reference/analytics/trendanalysis--retrieve-trends-of-historical-immos-market"
+            "api-experimental-reference/analytics/trendanalysis--retrieve-trends-of-historical-immos-market",
+            "api-experimental-reference/analytics/bucketed--obtains-statistics-by-obtaining-buckets-for-the-given-statistics-it-can-be-used-for-a-pie-chart"
           ]
         },
         {
