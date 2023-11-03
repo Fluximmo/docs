@@ -36,12 +36,16 @@
       "url": "api-v2-reference"
     },
     {
-      "name": "API Geo Reference",
+      "name": "API Geography Reference",
       "url": "api-geography-reference"
     },
     {
-      "name": "API Experimental Reference",
-      "url": "api-experimental-reference"
+      "name": "API DVF Reference",
+      "url": "api-dvf-reference"
+    },
+    {
+      "name": "API Analytics Reference",
+      "url": "api-analytics-reference"
     }
   ],
   "anchors": [
@@ -90,41 +94,56 @@
       ]
     },
     {
-      "group": "API Experimental Reference",
+      "group": "API DVF Reference",
       "pages": [
         {
-          "group": "Analytics",
+          "group": "Search",
           "pages": [
-            "api-experimental-reference/analytics/combined--obtains-statistics-by-combining-two-fields-with-each-others",
-            "api-experimental-reference/analytics/count--count-the-number-of-properties-matching-the-given-query",
-            "api-experimental-reference/analytics/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
-            "api-experimental-reference/analytics/geoaggregateanalytics-summarizes-historical-immos-data-as-metrics-and-statistics-based-on-geospatial-grouping",
-            "api-experimental-reference/analytics/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
-            "api-experimental-reference/analytics/trendanalysis--retrieve-trends-of-historical-immos-market",
-            "api-experimental-reference/analytics/bucketed--obtains-statistics-by-obtaining-buckets-for-the-given-statistics-it-can-be-used-for-a-pie-chart"
+            "api-dvf-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
+            "api-dvf-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "API Analytics Reference",
+      "pages": [
+        {
+          "group": "Properties",
+          "pages": [
+            "api-analytics-reference/analytics/combined--obtains-statistics-by-combining-two-fields-with-each-others",
+            "api-analytics-reference/analytics/count--count-the-number-of-properties-matching-the-given-query",
+            "api-analytics-reference/analytics/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
+            "api-analytics-reference/analytics/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
+            "api-analytics-reference/analytics/trendanalysis--retrieve-trends-of-historical-immos-market"
           ]
         },
         {
           "group": "City",
           "pages": [
-            "api-experimental-reference/city/getadministrativeinfo--obtain-a-summary-of-city-on-the-adminstrative-aspect-such-as-regulation-and-taxation-infromation",
-            "api-experimental-reference/city/getemployementstatistics--obtain-city-related-employment-statistics",
-            "api-experimental-reference/city/gethealthstatistics--obtain-city-related-health-statistics",
-            "api-experimental-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
-            "api-experimental-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area",
-            "api-experimental-reference/city/getmarketstatistics--obtain-citys-market-statistics",
-            "api-experimental-reference/city/getpopulationinfo--obtain-citys-population-main-information",
-            "api-experimental-reference/city/getsecuritystatistics--obtain-citys-security-statistics",
-            "api-experimental-reference/city/getsummary--obtain-a-summary-of-city-statistics"
+            "api-city-reference/city/getadministrativeinfo--obtain-a-summary-of-city-on-the-adminstrative-aspect-such-as-regulation-and-taxation-infromation",
+            "api-city-reference/city/getemployementstatistics--obtain-city-related-employment-statistics",
+            "api-city-reference/city/gethealthstatistics--obtain-city-related-health-statistics",
+            "api-city-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
+            "api-city-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area",
+            "api-city-reference/city/getmarketstatistics--obtain-citys-market-statistics",
+            "api-city-reference/city/getpopulationinfo--obtain-citys-population-main-information",
+            "api-city-reference/city/getsecuritystatistics--obtain-citys-security-statistics",
+            "api-city-reference/city/getsummary--obtain-a-summary-of-city-statistics"
           ]
         },
         {
           "group": "DVF",
           "pages": [
-            "api-experimental-reference/dvf/combineddvfanalytics--retrieve-combined-statistics",
-            "api-experimental-reference/dvf/generaldvfanalytics--retrieve-advanced-statistics-of-transactions",
-            "api-experimental-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
-            "api-experimental-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
+            "api-dvf-reference/dvf/combineddvfanalytics--retrieve-combined-statistics",
+            "api-dvf-reference/dvf/generaldvfanalytics--retrieve-advanced-statistics-of-transactions"
+          ]
+        },
+        {
+          "group": "Maps",
+          "pages": [
+            "api-maps-reference/maps/dvfaggregatelayer-generate-map-layer-of-dvfs-transaction-that-aggregate-kpis",
+            "api-maps-reference/maps/propertiesaggregatelayer-generate-map-layer-of-properties-that-aggregate-kpis"
           ]
         }
       ]
