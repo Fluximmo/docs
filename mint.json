@@ -32,20 +32,20 @@
   ],
   "tabs": [
     {
-      "name": "API V2 Reference",
-      "url": "api-v2-reference"
+      "name": "Search and alerts",
+      "url": "api-search-alert-reference"
     },
     {
-      "name": "API Geography Reference",
+      "name": "Analytics",
+      "url": "api-analytics-reference"
+    },
+    {
+      "name": "Geography",
       "url": "api-geography-reference"
     },
     {
-      "name": "API DVF Reference",
-      "url": "api-dvf-reference"
-    },
-    {
-      "name": "API Analytics Reference",
-      "url": "api-analytics-reference"
+      "name": "AI",
+      "url": "api-ai-reference"
     }
   ],
   "anchors": [
@@ -81,69 +81,87 @@
       ]
     },
     {
-      "group": "API Geo Reference",
+      "group": "Geography",
       "pages": [
         {
-          "group": "Geographies",
+          "group": "Geocoding",
           "pages": [
-            "api-geography-reference/geographies/geocoding--retrieve-structured-geo-related-data-from-user-input",
-            "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point",
-            "api-geography-reference/geographies/detectlocation--extract-from-a-text-geographical-reference-and-obtain-related-locations-context-is-used-to-provide-better-results"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "API DVF Reference",
-      "pages": [
-        {
-          "group": "Search",
-          "pages": [
-            "api-dvf-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
-            "api-dvf-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "API Analytics Reference",
-      "pages": [
-        {
-          "group": "Properties",
-          "pages": [
-            "api-analytics-reference/analytics/combined--obtains-statistics-by-combining-two-fields-with-each-others",
-            "api-analytics-reference/analytics/count--count-the-number-of-properties-matching-the-given-query",
-            "api-analytics-reference/analytics/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
-            "api-analytics-reference/analytics/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
-            "api-analytics-reference/analytics/trendanalysis--retrieve-trends-of-historical-immos-market"
-          ]
-        },
-        {
-          "group": "City",
-          "pages": [
-            "api-city-reference/city/getadministrativeinfo--obtain-a-summary-of-city-on-the-adminstrative-aspect-such-as-regulation-and-taxation-infromation",
-            "api-city-reference/city/getemployementstatistics--obtain-city-related-employment-statistics",
-            "api-city-reference/city/gethealthstatistics--obtain-city-related-health-statistics",
-            "api-city-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
-            "api-city-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area",
-            "api-city-reference/city/getmarketstatistics--obtain-citys-market-statistics",
-            "api-city-reference/city/getpopulationinfo--obtain-citys-population-main-information",
-            "api-city-reference/city/getsecuritystatistics--obtain-citys-security-statistics",
-            "api-city-reference/city/getsummary--obtain-a-summary-of-city-statistics"
-          ]
-        },
-        {
-          "group": "DVF",
-          "pages": [
-            "api-dvf-reference/dvf/combineddvfanalytics--retrieve-combined-statistics",
-            "api-dvf-reference/dvf/generaldvfanalytics--retrieve-advanced-statistics-of-transactions"
+            "api-geography-reference/geographies/geocoding--retrieve-structured-geo-related-data-from-user-input"
           ]
         },
         {
           "group": "Maps",
           "pages": [
-            "api-maps-reference/maps/dvfaggregatelayer-generate-map-layer-of-dvfs-transaction-that-aggregate-kpis",
-            "api-maps-reference/maps/propertiesaggregatelayer-generate-map-layer-of-properties-that-aggregate-kpis"
+            "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point",
+            "api-geography-reference/maps/dvfaggregatelayer-generate-map-layer-of-dvfs-transaction-that-aggregate-kpis",
+            "api-geography-reference/maps/propertiesaggregatelayer-generate-map-layer-of-properties-that-aggregate-kpis"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Properties",
+      "pages": [
+        {
+          "group": "Basic",
+          "pages": [
+            "api-analytics-reference/properties/combined--obtains-statistics-by-combining-two-fields-with-each-others",
+            "api-analytics-reference/properties/count--count-the-number-of-properties-matching-the-given-query",
+            "api-analytics-reference/properties/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market"
+          ]
+        },
+        {
+          "group": "Advanced",
+          "pages": [
+            "api-analytics-reference/properties/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
+            "api-analytics-reference/properties/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
+            "api-analytics-reference/properties/trendanalysis--retrieve-trends-of-historical-immos-market"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "City",
+      "pages": [
+        {
+          "group": "General",
+          "pages": [
+            "api-analytics-reference/city/getsummary--obtain-a-summary-of-city-statistics",
+            "api-analytics-reference/city/getadministrativeinfo--obtain-a-summary-of-city-on-the-adminstrative-aspect-such-as-regulation-and-taxation-infromation",
+            "api-analytics-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area"
+          ]
+        },
+        {
+          "group": "Population",
+          "pages": [
+            "api-analytics-reference/city/getemployementstatistics--obtain-city-related-employment-statistics",
+            "api-analytics-reference/city/getpopulationinfo--obtain-citys-population-main-information"
+          ]
+        },
+        {
+          "group": "Conditions",
+          "pages": [
+            "api-analytics-reference/city/gethealthstatistics--obtain-city-related-health-statistics",
+            "api-analytics-reference/city/getsecuritystatistics--obtain-citys-security-statistics"
+          ]
+        },
+        {
+          "group": "Habitation",
+          "pages": [
+            "api-analytics-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
+            "api-analytics-reference/city/getmarketstatistics--obtain-citys-market-statistics"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "DVF",
+      "pages": [
+        {
+          "group": "Basic",
+          "pages": [
+            "api-analytics-reference/dvf/combineddvfanalytics--retrieve-combined-statistics",
+            "api-analytics-reference/dvf/generaldvfanalytics--retrieve-advanced-statistics-of-transactions"
           ]
         }
       ]
@@ -154,9 +172,9 @@
         {
           "group": "System",
           "pages": [
-            "api-v2-reference/system/getversion",
-            "api-v2-reference/system/healthz",
-            "api-v2-reference/system/get-the-list-of-real-estate-platforms"
+            "api-search-alert-reference/system/getversion",
+            "api-search-alert-reference/system/healthz",
+            "api-search-alert-reference/system/get-the-list-of-real-estate-platforms"
           ]
         }
       ]
@@ -167,29 +185,36 @@
         {
           "group": "Samples",
           "pages": [
-            "api-v2-reference/sample-properties/get-a-sample-of-properties",
-            "api-v2-reference/sample-properties/sample-properties-webhook-body"
+            "api-search-alert-reference/sample-properties/get-a-sample-of-properties",
+            "api-search-alert-reference/sample-properties/sample-properties-webhook-body"
           ]
         },
         {
           "group": "Properties",
           "pages": [
-            "api-v2-reference/properties/get-properties-byt-their-flx_id",
-            "api-v2-reference/properties/retrieve-a-property-by-url",
-            "api-v2-reference/properties-search/search-properties"
+            "api-search-alert-reference/properties/get-properties-byt-their-flx_id",
+            "api-search-alert-reference/properties/retrieve-a-property-by-url",
+            "api-search-alert-reference/properties-search/search-properties"
           ]
         },
         {
           "group": "Properties Alerts",
           "pages": [
-            "api-v2-reference/properties-alerts/create-a-new-alert-for-this-property-search",
-            "api-v2-reference/properties-alerts/get-the-search-criteria-of-a-propertyalert",
-            "api-v2-reference/properties-alerts/deactivate-a-property-search-alert",
-            "api-v2-reference/properties-alerts/update-the-search-criteria-of-a-property-alert",
-            "api-v2-reference/properties-alerts/get-all-your-property-alerts",
-            "api-v2-reference/properties-alerts/get-history-of-match-properties-by-its-saved-search-flxid"
+            "api-search-alert-reference/properties-alerts/create-a-new-alert-for-this-property-search",
+            "api-search-alert-reference/properties-alerts/get-the-search-criteria-of-a-propertyalert",
+            "api-search-alert-reference/properties-alerts/deactivate-a-property-search-alert",
+            "api-search-alert-reference/properties-alerts/update-the-search-criteria-of-a-property-alert",
+            "api-search-alert-reference/properties-alerts/get-all-your-property-alerts",
+            "api-search-alert-reference/properties-alerts/get-history-of-match-properties-by-its-saved-search-flxid"
           ]
         }
+      ]
+    },
+    {
+      "group": "API DVF",
+      "pages": [
+        "api-search-alert-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
+        "api-search-alert-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
       ]
     },
     {
@@ -198,37 +223,26 @@
         {
           "group": "Samples",
           "pages": [
-            "api-v2-reference/sample-adverts/get-a-sample-of-ads",
-            "api-v2-reference/sample-adverts/sample-advert-webhook-body"
+            "api-search-alert-reference/sample-adverts/get-a-sample-of-ads",
+            "api-search-alert-reference/sample-adverts/sample-advert-webhook-body"
           ]
         },
         {
           "group": "Adverts",
           "pages": [
-            "api-v2-reference/adverts/get-adverts-byt-their-flx_id",
-            "api-v2-reference/adverts-search/search-adverts"
+            "api-search-alert-reference/adverts/get-adverts-byt-their-flx_id",
+            "api-search-alert-reference/adverts-search/search-adverts"
           ]
         },
         {
           "group": "Adverts Alerts",
           "pages": [
-            "api-v2-reference/adverts-alerts/create-a-new-advert-alert-for-this-search",
-            "api-v2-reference/adverts-alerts/get-the-search-criteria-of-an-advert-alert",
-            "api-v2-reference/adverts-alerts/deactivate-a-search-advert-alert",
-            "api-v2-reference/adverts-alerts/update-the-search-criteria-of-an-advert-alert",
-            "api-v2-reference/adverts-alerts/get-all-your-advert-alerts",
-            "api-v2-reference/adverts-alerts/get-history-of-match-adverts-by-its-saved-search-flxid"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "API Analytics",
-      "pages": [
-        {
-          "group": "Analytics",
-          "pages": [
-            "api-v2-reference/analytics/get-analytics-data-for-a-given-context-property-location-"
+            "api-search-alert-reference/adverts-alerts/create-a-new-advert-alert-for-this-search",
+            "api-search-alert-reference/adverts-alerts/get-the-search-criteria-of-an-advert-alert",
+            "api-search-alert-reference/adverts-alerts/deactivate-a-search-advert-alert",
+            "api-search-alert-reference/adverts-alerts/update-the-search-criteria-of-an-advert-alert",
+            "api-search-alert-reference/adverts-alerts/get-all-your-advert-alerts",
+            "api-search-alert-reference/adverts-alerts/get-history-of-match-adverts-by-its-saved-search-flxid"
           ]
         }
       ]
@@ -239,7 +253,7 @@
         {
           "group": "Estimations",
           "pages": [
-            "api-v2-reference/estimations/estimate-the-price-of-a-property"
+            "api-ai-reference/estimations/estimate-the-price-of-a-property"
           ]
         }
       ]
@@ -247,8 +261,8 @@
     {
       "group": "API Models",
       "pages": [
-        "api-v2-reference/_api-models/property",
-        "api-v2-reference/_api-models/advert"
+        "api-search-alert-reference/_api-models/property",
+        "api-search-alert-reference/_api-models/advert"
       ]
     }
   ],

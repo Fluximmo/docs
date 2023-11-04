@@ -12,7 +12,7 @@
   },
   "servers": [
     {
-      "url": "https://api.f6o.io/"
+      "url": "https://api.f6o.io"
     }
   ],
   "security": [
@@ -155,124 +155,6 @@
   },
   "components": {
     "schemas": {
-      "DataFeature": {
-        "type": "object",
-        "properties": {
-          "geometry": {
-            "$ref": "#/components/schemas/DataGeometry"
-          },
-          "id": {
-            "type": "string"
-          },
-          "intId": {
-            "type": "string",
-            "format": "int64"
-          },
-          "values": {
-            "title": "unique values",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/geobufDataValue"
-            }
-          },
-          "properties": {
-            "title": "pairs of key/value indexes",
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          "customProperties": {
-            "title": "arbitrary properties",
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        }
-      },
-      "DataFeatureCollection": {
-        "type": "object",
-        "properties": {
-          "features": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataFeature"
-            }
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/geobufDataValue"
-            }
-          },
-          "customProperties": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        }
-      },
-      "DataGeometry": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/DataGeometryType"
-          },
-          "lengths": {
-            "title": "coordinate structure in lengths",
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          "coords": {
-            "title": "delta-encoded integer values",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "int64"
-            }
-          },
-          "geometries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGeometry"
-            }
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/geobufDataValue"
-            }
-          },
-          "customProperties": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        }
-      },
-      "DataGeometryType": {
-        "type": "string",
-        "default": "POINT",
-        "enum": [
-          "POINT",
-          "MULTIPOINT",
-          "LINESTRING",
-          "MULTILINESTRING",
-          "POLYGON",
-          "MULTIPOLYGON",
-          "GEOMETRYCOLLECTION"
-        ]
-      },
       "GeocodingRequestFilters": {
         "type": "object",
         "properties": {
@@ -345,9 +227,6 @@
           "score": {
             "type": "number",
             "format": "double"
-          },
-          "shape": {
-            "$ref": "#/components/schemas/geobufData"
           },
           "kind": {
             "type": "string"

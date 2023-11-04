@@ -12,7 +12,7 @@
   },
   "servers": [
     {
-      "url": "https://api.f6o.io/"
+      "url": "https://api.f6o.io"
     }
   ],
   "security": [
