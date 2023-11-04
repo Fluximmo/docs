@@ -357,15 +357,6 @@
             "title": "number of digits after decimal point for coordinates",
             "type": "integer",
             "format": "int64"
-          },
-          "featureCollection": {
-            "$ref": "#/components/schemas/DataFeatureCollection"
-          },
-          "feature": {
-            "$ref": "#/components/schemas/DataFeature"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/DataGeometry"
           }
         }
       },
