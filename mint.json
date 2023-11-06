@@ -77,7 +77,8 @@
       "group": "Main concepts",
       "pages": [
         "doc/main-concepts/properties-adverts",
-        "doc/main-concepts/webhooks"
+        "doc/main-concepts/webhooks",
+        "doc/main-concepts/baas"
       ]
     },
     {
@@ -113,7 +114,6 @@
         {
           "group": "Advanced",
           "pages": [
-            "api-analytics-reference/properties/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market",
             "api-analytics-reference/properties/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
             "api-analytics-reference/properties/trendanalysis--retrieve-trends-of-historical-immos-market"
           ]
@@ -213,8 +213,13 @@
     {
       "group": "API DVF",
       "pages": [
-        "api-search-alert-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
-        "api-search-alert-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
+        {
+          "group": "DVF",
+          "pages": [
+            "api-search-alert-reference/dvf/getdvftransactionsbyid--retrieve-dvf-transaction-based-on-the-id",
+            "api-search-alert-reference/dvf/searchdvftransactions--provide-search-capabilities-for-past-real-estate-transactions-which-have-been-officially-registered-on-dvf"
+          ]
+        }
       ]
     },
     {
