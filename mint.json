@@ -24,6 +24,11 @@
   "feedback": {
     "thumbsRating": true
   },
+  "topbarCtaButton": {
+    "type": "link",
+    "url": "https://my.fluximmo.com",
+    "name": "My Account"
+  },
   "topbarLinks": [
     {
       "name": "Contact us",
@@ -167,20 +172,32 @@
       ]
     },
     {
-      "group": "API System",
+      "group": "System",
       "pages": [
         {
           "group": "System",
           "pages": [
             "api-search-alert-reference/system/getversion",
             "api-search-alert-reference/system/healthz",
-            "api-search-alert-reference/system/get-the-list-of-real-estate-platforms"
+            "api-search-alert-reference/system/get-the-list-of-real-estate-platforms",
+            "api-search-alert-reference/consumption/get-your-credit-consumption"
           ]
         }
       ]
     },
     {
-      "group": "API Properties",
+      "group": "AI",
+      "pages": [
+        {
+          "group": "AI",
+          "pages": [
+            "api-ai-reference/estimations/estimate-the-price-of-a-property"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Properties",
       "pages": [
         {
           "group": "Samples",
@@ -192,7 +209,9 @@
         {
           "group": "Properties",
           "pages": [
-            "api-search-alert-reference/properties/get-properties-byt-their-flx_id",
+            "api-search-alert-reference/properties/get-a-property-by-its-flx_id",
+            "api-search-alert-reference/properties/retreive-properties-by-their-flx_ids",
+            "api-search-alert-reference/properties/retrieve-a-property-by-advert-flxid",
             "api-search-alert-reference/properties/retrieve-a-property-by-url",
             "api-search-alert-reference/properties-search/search-properties"
           ]
@@ -201,17 +220,19 @@
           "group": "Properties Alerts",
           "pages": [
             "api-search-alert-reference/properties-alerts/create-a-new-alert-for-this-property-search",
+            "api-search-alert-reference/properties-alerts/create-many-new-alert-for-property-search",
             "api-search-alert-reference/properties-alerts/get-the-search-criteria-of-a-propertyalert",
             "api-search-alert-reference/properties-alerts/deactivate-a-property-search-alert",
             "api-search-alert-reference/properties-alerts/update-the-search-criteria-of-a-property-alert",
             "api-search-alert-reference/properties-alerts/get-all-your-property-alerts",
+            "api-search-alert-reference/properties-alerts/activate-a-property-search-alert",
             "api-search-alert-reference/properties-alerts/get-history-of-match-properties-by-its-saved-search-flxid"
           ]
         }
       ]
     },
     {
-      "group": "API DVF",
+      "group": "DVF",
       "pages": [
         {
           "group": "DVF",
@@ -223,7 +244,7 @@
       ]
     },
     {
-      "group": "API Adverts",
+      "group": "Adverts",
       "pages": [
         {
           "group": "Samples",
@@ -236,6 +257,7 @@
           "group": "Adverts",
           "pages": [
             "api-search-alert-reference/adverts/get-adverts-byt-their-flx_id",
+            "api-search-alert-reference/adverts-search/count-adverts-for-search",
             "api-search-alert-reference/adverts-search/search-adverts"
           ]
         },
@@ -247,24 +269,14 @@
             "api-search-alert-reference/adverts-alerts/deactivate-a-search-advert-alert",
             "api-search-alert-reference/adverts-alerts/update-the-search-criteria-of-an-advert-alert",
             "api-search-alert-reference/adverts-alerts/get-all-your-advert-alerts",
+            "api-search-alert-reference/adverts-alerts/activate-a-search-advert-alert",
             "api-search-alert-reference/adverts-alerts/get-history-of-match-adverts-by-its-saved-search-flxid"
           ]
         }
       ]
     },
     {
-      "group": "API Estimation",
-      "pages": [
-        {
-          "group": "Estimations",
-          "pages": [
-            "api-ai-reference/estimations/estimate-the-price-of-a-property"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "API Models",
+      "group": "Models",
       "pages": [
         "api-search-alert-reference/_api-models/property",
         "api-search-alert-reference/_api-models/advert"
