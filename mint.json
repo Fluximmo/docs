@@ -258,7 +258,8 @@
           "pages": [
             "api-search-alert-reference/adverts/get-adverts-byt-their-flx_id",
             "api-search-alert-reference/adverts-search/count-adverts-for-search",
-            "api-search-alert-reference/adverts-search/search-adverts"
+            "api-search-alert-reference/adverts-search/search-adverts",
+            "api-search-alert-reference/adverts/retrieve-advert-by-url"
           ]
         },
         {
