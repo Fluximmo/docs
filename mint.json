@@ -208,12 +208,18 @@
         {
           "group": "Properties",
           "pages": [
-            "api-search-alert-reference/properties/raiseissue--raise-an-issue-for-a-given-property",
             "api-search-alert-reference/properties/get-a-property-by-its-flx_id",
             "api-search-alert-reference/properties/retreive-properties-by-their-flx_ids",
             "api-search-alert-reference/properties/retrieve-a-property-by-advert-flxid",
             "api-search-alert-reference/properties/retrieve-a-property-by-url",
             "api-search-alert-reference/properties-search/search-properties"
+          ]
+        },
+        {
+          "group": "Reporting",
+          "pages": [
+            "api-search-alert-reference/properties/raiseissue--raise-an-issue-for-a-given-property",
+            "api-search-alert-reference/properties/getissue--get-raised-issues-for-a-given-property"
           ]
         },
         {
