@@ -216,11 +216,10 @@
           ]
         },
         {
-          "group": "Monitoring",
+          "group": "Reporting",
           "pages": [
             "api-search-alert-reference/properties/raiseissue--raise-an-issue-for-a-given-property",
-            "api-search-alert-reference/properties/getissue--get-raised-issues-for-a-given-property",
-            "api-search-alert-reference/properties/issuetimeseries--obtain-time-series-analysis-over-issues-for-all-the-properties"
+            "api-search-alert-reference/properties/getissue--get-raised-issues-for-a-given-property"
           ]
         },
         {
