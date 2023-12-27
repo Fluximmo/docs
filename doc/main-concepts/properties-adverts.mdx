@@ -45,7 +45,7 @@ The search functionality is categorized into three primary components:
 - Full-text Search: Operating on the same fields as the keyword search, this method employs fault tolerance and probabilistic algorithms to yield a broader range of results. This can lead to discovering relevant data that might not be immediately obvious.
 - Filters: Our powerful filtering options enable you to pinpoint the exact data you need. The filters operate on two principles:
 
-OR Parameters: Apply to fields that are lists, facilitating a non-exclusive (OR) search behavior. This means you can retrieve data matching any of the specified criteria in these fields.
+OR Parameters: Apply to fields that are lists, facilitating a non-exclusive (OR) search behavior. This means you can retrieve data matching any of the specified criteria in these fields. For example if you have a list holdings `["HOUSE", "APARTMENT"]` you will receive ads that are either an apartment or an house.
 AND Parameters: Apply to all other fields, enforcing an exclusive (AND) search behavior. This ensures that the retrieved data meet all the specified criteria in these fields.
 
 This query system is integrated consistently across our entire stack, ensuring uniform functionality across all endpoints. Whether you're querying properties or any other data, you'll find the same robust search capabilities at your disposal, empowering you to create an even more dynamic and effective search experience.
