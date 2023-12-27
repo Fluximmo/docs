@@ -35,6 +35,21 @@ Adverts are individual real estate advertising sourced from various platforms. T
     Adverts can be accessed via both APIs (Search or Alerts) and webhooks, providing flexibility in how you retrieve and integrate advert data.
 </Tip>
 
+## Querying
+
+Our platform is exclusively equipped with a sophisticated query engine designed to enable efficient and intuitive data extraction. This system is the product of our extensive expertise in search engine development, aimed at simplifying your search experience and allowing your team to focus more on business objectives rather than the intricacies of search filters.
+
+The search functionality is categorized into three primary components:
+
+- Keyword Search: This feature allows the retrieval of data containing specific keywords in their description or title. It's a direct and precise way to find exactly what you're looking for.
+- Full-text Search: Operating on the same fields as the keyword search, this method employs fault tolerance and probabilistic algorithms to yield a broader range of results. This can lead to discovering relevant data that might not be immediately obvious.
+- Filters: Our powerful filtering options enable you to pinpoint the exact data you need. The filters operate on two principles:
+
+OR Parameters: Apply to fields that are lists, facilitating a non-exclusive (OR) search behavior. This means you can retrieve data matching any of the specified criteria in these fields. For example if you have a list holdings `["HOUSE", "APARTMENT"]` you will receive ads that are either an apartment or an house.
+AND Parameters: Apply to all other fields, enforcing an exclusive (AND) search behavior. This ensures that the retrieved data meet all the specified criteria in these fields.
+
+This query system is integrated consistently across our entire stack, ensuring uniform functionality across all endpoints. Whether you're querying properties or any other data, you'll find the same robust search capabilities at your disposal, empowering you to create an even more dynamic and effective search experience.
+
 ## Conclusion
 
 Understanding the differences between properties and adverts is pivotal for optimizing your real estate data usage. Properties offer consolidated context and evolve dynamically, while adverts provide specific listing details. APIs are the preferred means to access both properties and adverts, offering comprehensive and adaptable data retrieval options.
