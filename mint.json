@@ -218,8 +218,7 @@
         {
           "group": "Reporting",
           "pages": [
-            "api-search-alert-reference/properties/raiseissue--raise-an-issue-for-a-given-property",
-            "api-search-alert-reference/properties/getissue--get-raised-issues-for-a-given-property"
+            "api-search-alert-reference/properties/raiseissue--raise-an-issue-for-a-given-property"
           ]
         },
         {
@@ -257,6 +256,12 @@
           "pages": [
             "api-search-alert-reference/sample-adverts/get-a-sample-of-ads",
             "api-search-alert-reference/sample-adverts/sample-advert-webhook-body"
+          ]
+        },
+        {
+          "group": "Reporting",
+          "pages": [
+            "api-search-alert-reference/adverts/raiseadissue--raise-an-issue-for-a-given-ad"
           ]
         },
         {
