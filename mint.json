@@ -131,7 +131,6 @@
           "group": "General",
           "pages": [
             "api-analytics-reference/city/getsummary--obtain-a-summary-of-city-statistics",
-            "api-analytics-reference/city/getadministrativeinfo--obtain-a-summary-of-city-on-the-adminstrative-aspect-such-as-regulation-and-taxation-infromation",
             "api-analytics-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area"
           ]
         },
