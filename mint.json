@@ -125,6 +125,31 @@
       ]
     },
     {
+      "group": "Market Stat",
+      "pages": [
+        {
+          "group": "Live",
+          "pages": [
+            "api-analytics-reference/market/getlivepricesstatistics--obtain-citys-live-prices-statistics",
+            "api-analytics-reference/market/getsoldpricesstatistics--obtain-citys-sold-prices-statistics"
+          ]
+        },
+        {
+          "group": "Sold",
+          "pages": [
+            "api-analytics-reference/market/getsoldpricesstatistics--obtain-citys-sold-prices-statistics-1"
+          ]
+        },
+        {
+          "group": "Market",
+          "pages": [
+            "api-analytics-reference/market/getmarketprice--obtain-citys-market-prices",
+            "api-analytics-reference/market/getmarketlivestatistics--obtain-citys-tension-and-listing-statistics-1"
+          ]
+        }
+      ]
+    },
+    {
       "group": "City",
       "pages": [
         {
@@ -152,7 +177,7 @@
           "group": "Habitation",
           "pages": [
             "api-analytics-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
-            "api-analytics-reference/city/getmarketstatistics--obtain-citys-market-statistics"
+            "api-analytics-reference/market/getmarketlivestatistics--obtain-citys-tension-and-listing-statistics"
           ]
         }
       ]
