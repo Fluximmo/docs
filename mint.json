@@ -24,7 +24,6 @@
     "thumbsRating": true
   },
   "topbarCtaButton": {
-    "type": "link",
     "url": "https://my.fluximmo.com",
     "name": "My Account"
   },
