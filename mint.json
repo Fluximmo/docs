@@ -44,10 +44,6 @@
       "url": "api-analytics-reference"
     },
     {
-      "name": "Geography",
-      "url": "api-geography-reference"
-    },
-    {
       "name": "AI",
       "url": "api-ai-reference"
     }
@@ -83,25 +79,6 @@
         "doc/main-concepts/properties-adverts",
         "doc/main-concepts/webhooks",
         "doc/main-concepts/baas"
-      ]
-    },
-    {
-      "group": "Geography",
-      "pages": [
-        {
-          "group": "Geocoding",
-          "pages": [
-            "api-geography-reference/geographies/geocoding--retrieve-structured-geo-related-data-from-user-input"
-          ]
-        },
-        {
-          "group": "Maps",
-          "pages": [
-            "api-geography-reference/geographies/reachability--fetch-reachable-areas-based-on-time-or-distance-from-or-to-a-given-point",
-            "api-geography-reference/maps/dvfaggregatelayer-generate-map-layer-of-dvfs-transaction-that-aggregate-kpis",
-            "api-geography-reference/maps/propertiesaggregatelayer-generate-map-layer-of-properties-that-aggregate-kpis"
-          ]
-        }
       ]
     },
     {
