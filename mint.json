@@ -90,13 +90,6 @@
             "api-analytics-reference/properties/count--count-the-number-of-properties-matching-the-given-query",
             "api-analytics-reference/properties/generalanalytics--retrieve-advanced-statistics-of-historical-immos-market"
           ]
-        },
-        {
-          "group": "Advanced",
-          "pages": [
-            "api-analytics-reference/properties/timeseriesanalytics--retrieve-statistical-analysis-on-a-time-series-base-of-historical-immos-market",
-            "api-analytics-reference/properties/trendanalysis--retrieve-trends-of-historical-immos-market"
-          ]
         }
       ]
     },
@@ -121,39 +114,6 @@
           "pages": [
             "api-analytics-reference/market/getmarketprice--obtain-citys-market-prices",
             "api-analytics-reference/market/getmarketlivestatistics--obtain-citys-tension-and-listing-statistics-1"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "City",
-      "pages": [
-        {
-          "group": "General",
-          "pages": [
-            "api-analytics-reference/city/getsummary--obtain-a-summary-of-city-statistics",
-            "api-analytics-reference/city/getlivingarea--obtain-city-related-living-area-or-the-so-called-attractivitys-area"
-          ]
-        },
-        {
-          "group": "Population",
-          "pages": [
-            "api-analytics-reference/city/getemployementstatistics--obtain-city-related-employment-statistics",
-            "api-analytics-reference/city/getpopulationinfo--obtain-citys-population-main-information"
-          ]
-        },
-        {
-          "group": "Conditions",
-          "pages": [
-            "api-analytics-reference/city/gethealthstatistics--obtain-city-related-health-statistics",
-            "api-analytics-reference/city/getsecuritystatistics--obtain-citys-security-statistics"
-          ]
-        },
-        {
-          "group": "Habitation",
-          "pages": [
-            "api-analytics-reference/city/gethousinginfo--obtain-citys-housing-main-informations",
-            "api-analytics-reference/market/getmarketlivestatistics--obtain-citys-tension-and-listing-statistics"
           ]
         }
       ]
